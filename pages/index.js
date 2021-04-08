@@ -2,17 +2,54 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import * as d3 from 'd3'
-
-export default function Home (props)
+import React,{useState, useEffect} from 'react'
+    
+export default function Home ({data,text})
 {
-  console.log(props.data)
-  console.log(`${props.text.length / 1024} kB`)
-  console.log(`${props.data.length} rows`)
-  console.log(`${props.data.columns.length} columns`)
-  // console.log(`%c ${props.parsedData}`,'color:green');
+  console.log(`${text.length / 1024} kB`)
+  console.log(`${data.length} rows`)
+  
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  });
+  
+  const pieArc = d3.arc()
+  .innerRadius(0)
+  .outerRadius(width)
+  
+  const colorPie = d3.pie().value(1)
+
   return (
     <div className={styles.container}>
-      <h1>Next D3</h1>
+      <svg width={width} height={height}>
+        <g transform={`translate(${width/2}, ${height/2})`} >
+          
+          //? Using d3.pie()
+          {colorPie(data).map(d => (
+            <path
+              fill={d.data['Hex']}
+              d={pieArc(d)}
+            />
+
+          ))}  
+        
+          
+          //? Standard approach
+          {/*props.data.map((d, i) => (
+            <path
+              fill={d['Hex']}
+              d={pieArc({
+              startAngle: (i/data.length)*2*Math.PI,
+              endAngle: ((i+1)/data.length)*2*Math.PI
+            })}/>
+          ))*/}
+
+          
+        </g>  
+      </svg>
     </div>
   )
 }
