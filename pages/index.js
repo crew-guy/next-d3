@@ -12,8 +12,7 @@ export const getStaticProps = async() =>
 {
   try {
     const csvUrl = "https://gist.githubusercontent.com/crew-guy/e1ae0b5db6ace5eda68bc8fb9e903576/raw/UN%2520World%2520Population%2520Dataset%2520-%2520Sheet1.csv"
-    const data = await fetch(csvUrl)
-    console.log(data.text())
+    const unParsedData = await fetch(csvUrl)
     return {
       props: {
         data
