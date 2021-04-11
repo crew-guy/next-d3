@@ -17,7 +17,7 @@ export default function Home({data}) {
     setWidth(window.innerWidth-100)
   },[])
 
-  const margin = {top:40, left:300, right:40, bottom:60}
+  const margin = {top:40, left:300, right:40, bottom:100}
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
@@ -34,7 +34,7 @@ export default function Home({data}) {
       .range([0, innerWidth])
   
   
-  const xAxisLabelOffset = 40
+  const xAxisLabelOffset = 80
   const siFormat = format(".2s");
   const tickFormat = tickFormat => siFormat(tickFormat).replace('G','B')
   
