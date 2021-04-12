@@ -7,7 +7,7 @@ export const AxisTop = ({xScale, innerHeight, tickFormat}) => (
                     style={{textAnchor:"middle"}}
                     dy='0.71em'
                     y={innerHeight}
-                >{tickFormat(tickValue*1000)}</text>
+                >{tickFormat(tickValue)}</text>
             </g>
         ))
 )

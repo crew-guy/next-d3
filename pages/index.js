@@ -21,7 +21,7 @@ export default function Home({data}) {
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
-  const xVal = d => d.Population
+  const xVal = d => d.Population*1000
   const yVal = d => d.Country
 
   const yScale = scaleBand()
@@ -50,7 +50,7 @@ export default function Home({data}) {
               textAnchor='center'
               y={innerHeight + xAxisLabelOffset}
             >Population</text>
-            <Marks data={data} xScale={xScale} yScale={yScale} xVal={xVal} yVal={yVal} />
+            <Marks data={data} xScale={xScale} yScale={yScale} xVal={xVal} yVal={yVal} toolTipFormat={tickFormat} />
           </g>
         </svg>
 )}
