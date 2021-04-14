@@ -28,15 +28,17 @@ const Home = ({data}) =>
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
-  const xVal = d => d.sepal_length
+  const xVal = d => d.petal_length
   const yVal = d=> d.sepal_width
 
   const xScale = d3.scaleLinear()
-    .domain(d3.extent(data, xVal))
+    // .domain(d3.extent(data, xVal))
+    .domain([0,d3.max(data,xVal)])
     .range([0, innerWidth])
   
   const yScale = d3.scaleLinear()
-    .domain(d3.extent(data, yVal))
+    // .domain(d3.extent(data, yVal))
+    .domain([0,d3.max(data,yVal)])
     .range([0, innerHeight])
   
   
@@ -49,7 +51,7 @@ const Home = ({data}) =>
       <g width={innerWidth} height={innerHeight} transform={`translate(${margin.left},${margin.top})`} >
         <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat} />
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickFormat={yAxisTickFormat} />
-        <Marks xScale={xScale} yScale={yScale} />
+        <Marks xScale={xScale} data={data} xVal={xVal} yVal={yVal} yScale={yScale} />
       </g>
     </svg>
   )
