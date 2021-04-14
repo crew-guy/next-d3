@@ -36,7 +36,7 @@ const Home = ({data}) =>
     .range([0, innerWidth])
   
   const yScale = d3.scaleLinear()
-    .domain(d3.extent(data, xVal))
+    .domain(d3.extent(data, yVal))
     .range([0, innerHeight])
   
   
@@ -49,7 +49,7 @@ const Home = ({data}) =>
       <g width={innerWidth} height={innerHeight} transform={`translate(${margin.left},${margin.top})`} >
         <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat} />
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickFormat={yAxisTickFormat} />
-        <Marks/>
+        <Marks xScale={xScale} yScale={yScale} />
       </g>
     </svg>
   )

@@ -1,4 +1,13 @@
-export const Marks = () =>
+export const Marks = ({yScale,xScale }) =>
 (
-    <h1>mARKS</h1>
+    yScale.ticks().map(tickValue => (
+        <g>
+            <circle
+                cx={xScale(tickValue)}
+                cy={yScale(tickValue)}
+                r={5}
+            />
+            <title>{ yScale(tickValue)}</title>
+        </g>
+    ))
 )
