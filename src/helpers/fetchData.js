@@ -7,3 +7,5 @@ export const fetchData = async () =>
     const text = csvFormat(data)
     return data
 }
+
+export default fetchData
