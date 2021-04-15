@@ -1,18 +1,21 @@
-export const AxisLeft = ({yScale,innerWidth, tickFormat}) =>
+export const AxisLeft = ({ yScale, innerWidth, innerHeight, tickFormat, tickOffset }) =>
 (
-    yScale.ticks().map(tickValue => (
-        <g transform={`translate(0,${yScale(tickValue)})`} >
-            <line
-                x2={innerWidth}
-                stroke="black"
-            />
-            <text
-                x={0}
-                style={ {textAnchor:"center"}}
-                dx="-0.3em"
-            >
-                {tickFormat(tickValue)}    
-            </text>
-        </g>  
-    ))
+    <g className="y-ticks">
+        {yScale.ticks().map(tickValue => (
+            <g transform={`translate(0,${innerHeight - yScale(tickValue)})`} >
+                <line
+                    x2={innerWidth}
+                    className="ticks"
+                />
+                <text
+                    x={-tickOffset}
+                    dy="0.4em"
+                    style={ {textAnchor:"end"}}
+                    dx="-0.3em"
+                >
+                    {tickFormat(tickValue)}    
+                </text>
+            </g>  
+        ))}
+    </g>
 )
