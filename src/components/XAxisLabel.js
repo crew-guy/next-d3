@@ -1,7 +1,12 @@
-export default function XAxisLabel  () {
+export default function XAxisLabel  ({innerHeight, innerWidth, xAxisLabelOffset, xAxisLabel}) {
     return (
-      <main>
-          I am axis label x
-      </main>
+        <text
+            className="labels"
+            x={innerWidth / 2}
+            y={xAxisLabelOffset + innerHeight}
+            textAnchor="middle"
+        >
+            {xAxisLabel}
+        </text>
       )
     }

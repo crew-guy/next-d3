@@ -1,7 +1,16 @@
-export default function YAxisLabel  () {
+export default function YAxisLabel  ({innerHeight, yAxisLabelOffset, yAxisLabel}) {
     return (
-      <main>
-          I am axis label Y
-      </main>
+        <text
+            className="labels"
+            transform={
+                `translate(
+                    ${-yAxisLabelOffset},
+                    ${innerHeight / 2}
+                    ),
+                rotate(-90)`
+            }
+        >
+            {yAxisLabel}
+        </text>
       )
     }

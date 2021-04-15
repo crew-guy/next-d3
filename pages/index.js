@@ -14,19 +14,30 @@ import YAxisLabel from '@components/YAxisLabel'
 export default function Home({data}) {
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState(0)
-  const [config, setConfig] = useState({})  
+  // const [config, setConfig] = useState({})  
   
   // Fetching the browser's height and the width from the window object 
   useEffect(() =>
   {
     setHeight(window.innerHeight)
     setWidth(window.innerWidth)
-    setConfig(plotConfig(data, height, width))
-  },[])
+    // setConfig(plotConfig(data, height, width))
+  }, [])
+  
+  const margin = {
+    top: 60,
+    left: 140,
+    right: 80,
+    bottom:100
+  }
+  
+  // DIMENSIONS OF PLOT EXCLUDING MARGIN
+  const innerHeight = height-margin.top-margin.bottom
+  const innerWidth = width - margin.left - margin.right
+
+  const config = plotConfig(data,innerHeight, innerWidth)
+
   const {
-    margin,
-    innerHeight,
-    innerWidth,
     xVal,
     yVal,
     xScale,
@@ -35,30 +46,54 @@ export default function Home({data}) {
     yAxisLabel,
     xAxisLabelOffset,
     yAxisLabelOffset,
+    xAxisTickOffset,
+    yAxisTickOffset,
     xAxisTickFormat,
-    yAxisTickFormat
+    yAxisTickFormat,
+    tooltipFormat,
+    radiusCircle
   } = config
-  // console.log({margin})
-
-  // const margin = {
-  //   top: 40,
-  //   left:40
-  // }
-
-  console.log({data})
+  // console.log({data})
 
   return (
-    <svg height = {height} width = {width} >
+      <svg height={height} width={width} >
       <g
         height={innerHeight}
         width={innerWidth}
-        transform={`translate(${margin ? margin.top : 40},${margin ? margin.left : 40})`}
+        transform={`translate(${margin.left},${margin.top})`}
       >
-        <AxisLeft />
-        <AxisBottom />
-        <Marks />
-        <XAxisLabel />
-        <YAxisLabel/>
+        <AxisBottom
+          xScale={xScale}
+          innerHeight={innerHeight}
+          xAxisTickOffset={xAxisTickOffset}
+          tickFormat={xAxisTickFormat}
+        />
+        <AxisLeft
+          yScale={yScale}
+          yAxisTickOffset={yAxisTickOffset}
+          innerWidth={innerWidth}
+          tickFormat={yAxisTickFormat}
+        />
+        <Marks
+          data={data}
+          xScale={xScale}
+          yScale={yScale}
+          xVal={xVal}
+          yVal={yVal}
+          radiusCircle={radiusCircle}
+          tooltipFormat={tooltipFormat}
+        />
+        <XAxisLabel
+          innerHeight={innerHeight}
+          innerWidth={innerWidth}
+          xAxisLabelOffset={xAxisLabelOffset}
+          xAxisLabel={xAxisLabel}
+        />
+        <YAxisLabel
+          innerHeight={innerHeight}
+          yAxisLabelOffset={yAxisLabelOffset}
+          yAxisLabel={yAxisLabel}
+        />
       </g>
     </svg>
   )

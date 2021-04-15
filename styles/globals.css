@@ -1,16 +1,38 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.ticks,
+.labels {
+	stroke: gray;
+	color: gray;
+}
+.labels {
+	fill: gray;
+	font-size: 2rem;
+}
+
+.marks circle {
+	fill: #42a5b3;
+}
+
+.marks path {
+	fill: none;
+	stroke: #42a5b3;
+	stroke-width: 8;
+	stroke-linejoin: round;
+	stroke-linecap: round;
 }
