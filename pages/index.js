@@ -1,65 +1,73 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import {fetchData} from '@helpers/fetchData'
+import { useState, useEffect } from 'react'
+import { plotConfig } from '@helpers/config'
 
-export default function Home() {
+// Importing the components 
+import AxisLeft from '@components/AxisLeft'
+import AxisBottom from '@components/AxisBottom'
+import Marks from '@components/Marks'
+import XAxisLabel from '@components/XAxisLabel'
+import YAxisLabel from '@components/YAxisLabel'
+
+export default function Home({data}) {
+  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState(0)
+  const [config, setConfig] = useState({})  
+  
+  // Fetching the browser's height and the width from the window object 
+  useEffect(() =>
+  {
+    setHeight(window.innerHeight)
+    setWidth(window.innerWidth)
+    setConfig(plotConfig(data, height, width))
+  },[])
+  const {
+    margin,
+    innerHeight,
+    innerWidth,
+    xVal,
+    yVal,
+    xScale,
+    yScale,
+    xAxisLabel,
+    yAxisLabel,
+    xAxisLabelOffset,
+    yAxisLabelOffset,
+    xAxisTickFormat,
+    yAxisTickFormat
+  } = config
+  // console.log({margin})
+
+  // const margin = {
+  //   top: 40,
+  //   left:40
+  // }
+
+  console.log({data})
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <svg height = {height} width = {width} >
+      <g
+        height={innerHeight}
+        width={innerWidth}
+        transform={`translate(${margin ? margin.top : 40},${margin ? margin.left : 40})`}
+      >
+        <AxisLeft />
+        <AxisBottom />
+        <Marks />
+        <XAxisLabel />
+        <YAxisLabel/>
+      </g>
+    </svg>
   )
+}
+
+export const getStaticProps = async () =>
+{
+  const data = await fetchData()
+  return {
+    props:{data}
+  }
 }
