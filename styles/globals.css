@@ -15,24 +15,24 @@ a {
 	box-sizing: border-box;
 }
 
-.ticks,
-.labels {
-	stroke: gray;
-	color: gray;
-}
-.labels {
-	fill: gray;
-	font-size: 2rem;
-}
-
-.marks circle {
-	fill: #42a5b3;
-}
-
-.marks path {
-	fill: none;
+.marks .feature {
+	fill: #137b80;
 	stroke: #42a5b3;
-	stroke-width: 8;
+	stroke-width: 2;
 	stroke-linejoin: round;
 	stroke-linecap: round;
+}
+
+.marks .sphere {
+	fill: #ececec;
+}
+
+.interior {
+	fill: none;
+	color: red;
+}
+
+.marks .graticules {
+	fill: none;
+	stroke: #137b80;
 }

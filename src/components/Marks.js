@@ -1,28 +1,21 @@
-import {curveCardinal, curveStep, line } from 'd3'
+import {geoEqualEarth, geoNaturalEarth1, geoPath, geoGraticule } from 'd3'
 
-export default function Marks({ data, xScale, yScale, xVal, yVal, tooltipFormat, radiusCircle })
+// const projection = geoEqualEarth()
+const projection = geoNaturalEarth1()
+const path = geoPath(projection)
+const graticule = geoGraticule() 
+
+export default function Marks({countries, interiors})
 {
+    // console.log(countries)
     return (
         <g className="marks" >
-            <path
-                d={
-                    line()
-                        .x(d => xScale(xVal(d)))
-                        .y(d => yScale(yVal(d)))
-                        .curve(curveCardinal)
-                        (data)
-                }
-            />
-            {data.map(dataPoint => (
-                <g className="mark">
-                    <circle
-                    cx={xScale(xVal(dataPoint))}
-                    cy={yScale(yVal(dataPoint))}
-                    r={radiusCircle}
-                    />
-                    <title>{tooltipFormat(yVal(dataPoint))} </title>
-                </g>
-                )  )}
+            <path className="sphere" d={path({type:'Sphere'})}/>
+            <path className="graticules" d={path(graticule())} />
+            {countries.features.map(feature => (
+                <path className="feature" d = {path(feature)}/>
+            ))}
+            {/*<path className="interior" d={path(interiors)}/>*/}
         </g>
 
       )
