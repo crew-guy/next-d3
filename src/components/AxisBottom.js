@@ -1,23 +1,24 @@
-export const AxisBottom = ({xScale, innerHeight,tickFormat, tickOffset}) =>
-{
-    // console.log(xScale.ticks())
+export const AxisBottom =({xScale, innerHeight, xAxisTickFormat}) => {
     return (
-        <g className="x-ticks">
+        <g className='x-axis-labels' >
             {xScale.ticks().map(tickValue => (
-                <g transform={`translate(${xScale(tickValue)},0)`} >
+                <g
+                    className="x-label labels"
+                    transform={`translate(${xScale(tickValue), 0})`}
+                >
                     <line
                         y2={innerHeight}
-                        className='ticks'
-                        />
+                    />
                     <text
-                        style={{ textAnchor: "center" }}
-                        y={innerHeight + tickOffset}
-                        dy="0.45em"
+                        textAnchor="center"
+                        y={innerHeight + 8}
+                        dy="0.4em"
                     >
-                        {tickFormat(tickValue)}
+                        {xAxisTickFormat(tickValue)}
                     </text>
                 </g>
-            ) )}
+            ))}
         </g>
-    )
+
+  )
 }

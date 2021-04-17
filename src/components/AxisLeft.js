@@ -1,21 +1,19 @@
-export const AxisLeft = ({ yScale, innerWidth, innerHeight, tickFormat, tickOffset }) =>
-(
-    <g className="y-ticks">
+export const AxisLeft = ({ yScale, innerWidth, yAxisTickFormat, xAxisTickOffset }) => (
+    <g className="y-axis-labels" >
         {yScale.ticks().map(tickValue => (
-            <g transform={`translate(0,${innerHeight - yScale(tickValue)})`} >
+            <g
+                className="y-label labels"
+                transform={`translate(0,${yScale(tickValue)}) `} >
                 <line
                     x2={innerWidth}
-                    className="ticks"
-                />
+                />  
                 <text
-                    x={-tickOffset}
-                    dy="0.4em"
-                    style={ {textAnchor:"end"}}
-                    dx="-0.3em"
+                    textAnchor="end"
+                    xAxisTickOffset = {-xAxisTickOffset}
                 >
-                    {tickFormat(tickValue)}    
+                    {yAxisTickFormat(tickValue)}
                 </text>
-            </g>  
-        ))}
+            </g>
+        ) )  }
     </g>
 )
