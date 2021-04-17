@@ -33,11 +33,25 @@ const Home = () =>
     yAxisLabel,
     xAxisLabelOffset,
     yAxisLabelOffset,
+    currentX,
+    currentY
   } = config
 
   return (
-    <svg height = {height} width = {width} style = {{background:"#eee" }}>
-      <g height={innerHeight} width={innerWidth} transform={`translate(${margin.left},${margin.top})`}  style = {{background:"#aaa" }}>
+    <svg
+      height={height}
+      width={width}
+    >
+      <g
+        height={innerHeight}
+        width={innerWidth}
+        transform={
+          `translate(
+            ${margin.left},
+            ${margin.top}
+            )`
+        }
+      >
         <AxisBottom
           xScale={xScale}
           innerHeight={innerHeight}
@@ -49,6 +63,25 @@ const Home = () =>
           innerWidth={innerWidth}
           yAxisTickFormat={yAxisTickFormat}
           yAxisTickOffset={yAxisTickOffset}
+        />
+        <Marks
+          xScale={xScale}
+          yScale={yScale}
+          xVal={xVal}
+          yVal={yVal}
+          data={data}
+          tooltipFormat={tooltipFormat}
+        />
+        <XAxisLabel
+          innerHeight={innerHeight}
+          innerWidth={innerWidth}
+          xAxisLabel={xAxisLabel}
+          xAxisLabelOffset={xAxisLabelOffset}
+        />
+        <YAxisLabel
+          innerHeight={innerHeight}
+          yAxisLabel={yAxisLabel}
+          yAxisLabelOffset={yAxisLabelOffset}
         />
       </g>
     </svg>

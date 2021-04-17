@@ -20,10 +20,10 @@ const ConfigProvider = ({ children }) =>
         (async () => {
             const temp = await useData()
             setData(temp)
+            setHeight(window.innerHeight)
+            setWidth(window.innerWidth)
         })()
         // console.log(data)
-        setHeight(window.innerHeight)
-        setWidth(window.innerWidth)
     }, [])
 
 
@@ -34,7 +34,27 @@ const ConfigProvider = ({ children }) =>
         right: 90,
     }
 
-    // console.log(data)
+    console.log(data)
+    config.data = data
+    // console.log(config.data)
+
+    // ATTRIBUTES
+    const currentX = attributes[0]
+    const currentY = attributes[1]
+
+    config.currentX = currentX
+    config.currentY = currentY
+
+    const [xAttribute, setXAttribute] = useState(currentX.value)
+    const [yAttribute, setYAttribute] = useState(currentY.value)
+    
+    config.setXAttribute = setXAttribute
+    config.setYAttribute = setYAttribute
+
+    config.xVal = d => d[xAttribute]
+    config.yVal = d => d[yAttribute]
+    
+    console.log(config.xVal)
 
     // HEIGHTS AND WIDTHS
     config.height = height
@@ -46,40 +66,23 @@ const ConfigProvider = ({ children }) =>
     // SCALES
     config.xScale = scaleLinear()
         // .domain(extent(data, config.xVal))
-        .domain([0,max(data,config.xVal)])
-        .range([0, config.innerWidth])
+        .domain(extent(data,config.xVal))
+        .range([0,config.innerWidth])
         .nice()
-    
+
     config.yScale = scaleLinear()
         // .domain(extent(data, config.yVal))
         .domain([0,max(data,config.yVal)])
-        .range([0, config.innerHeight])
-
-    
-
-    // ATTRIBUTES
-    const currentX = attributes[0]
-    const currentY = attributes[1]
-
-    const [xAttribute, setXAttribute] = useState(currentX.value)
-    const [yAttribute, setYAttribute] = useState(currentY.value)
-
-    config.xVal = d => d[xAttribute]
-    config.yVal = d=> d[yAttribute]
-    
-    config.setXAttribute = setXAttribute
-    config.setYAttribute = setYAttribute
+        .range([config.innerHeight,0]) 
 
     // TICKS AND TOOLTIPS
     config.xAxisTickOffset = 8
-    config.yAxisTickOffset = -8
+    config.yAxisTickOffset = 8
     config.tooltipFormat = d => d
     config.xAxisTickFormat = d => d
     config.yAxisTickFormat = d => d
 
     // LABELS
-
-    // TODO : Get the label values from the attributes list that you will set
     config.xAxisLabel = currentX.label
     config.yAxisLabel = currentY.label
     config.xAxisLabelOffset = 70

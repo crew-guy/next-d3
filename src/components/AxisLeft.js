@@ -1,4 +1,9 @@
-export const AxisLeft = ({ yScale, innerWidth, yAxisTickFormat, xAxisTickOffset }) => (
+export const AxisLeft = ({
+    yScale,
+    innerWidth,
+    yAxisTickFormat,
+    yAxisTickOffset
+    }) => (
     <g className="y-axis-labels" >
         {yScale.ticks().map(tickValue => (
             <g
@@ -9,11 +14,11 @@ export const AxisLeft = ({ yScale, innerWidth, yAxisTickFormat, xAxisTickOffset 
                 />  
                 <text
                     textAnchor="end"
-                    xAxisTickOffset = {-xAxisTickOffset}
+                    x={-yAxisTickOffset}
                 >
                     {yAxisTickFormat(tickValue)}
                 </text>
             </g>
-        ) )  }
+        ))} 
     </g>
 )
