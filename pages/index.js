@@ -5,6 +5,7 @@ import {Marks} from '@components/Marks'
 import { useConfig } from "@contexts/ConfigContext"
 import {XAxisLabel} from "@components/XAxisLabel"
 import {YAxisLabel} from '@components/YAxisLabel'
+import {Dropdown} from '@components/Dropdown'
 
 const Home = () =>
 {
@@ -14,6 +15,7 @@ const Home = () =>
   const {
     data,
     margin,
+    attributes,
     height,
     width,
     innerHeight,
@@ -38,6 +40,9 @@ const Home = () =>
   } = config
 
   return (
+    <>
+    <Dropdown attributes={attributes} setAttribute={setXAttribute}  />
+    <Dropdown attributes={attributes} setAttribute={setYAttribute}  />
     <svg
       height={height}
       width={width}
@@ -85,6 +90,7 @@ const Home = () =>
         />
       </g>
     </svg>
+  </>
   )
 }
 

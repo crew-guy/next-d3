@@ -2,9 +2,10 @@ export const AxisBottom = ({
     xScale,
     innerHeight,
     xAxisTickFormat,
-    yAxisTickOffset 
+    xAxisTickOffset
     }) =>
-{   
+{
+    console.log(innerHeight)
     return (
         <g className='x-axis-labels' >
             {xScale.ticks().map(tickValue => (
@@ -17,7 +18,8 @@ export const AxisBottom = ({
                     />
                     <text
                         textAnchor="middle"
-                        dy="-0.6em"
+                        dy="0.6em"
+                        y={innerHeight + xAxisTickOffset}
                     >
                         {xAxisTickFormat(tickValue)}
                     </text>

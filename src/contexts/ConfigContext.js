@@ -51,6 +51,8 @@ const ConfigProvider = ({ children }) =>
     config.setXAttribute = setXAttribute
     config.setYAttribute = setYAttribute
 
+    config.attributes = attributes
+
     config.xVal = d => d[xAttribute]
     config.yVal = d => d[yAttribute]
     
