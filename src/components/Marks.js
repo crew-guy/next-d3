@@ -1,16 +1,20 @@
 export const Marks = ({
     xScale,
     yScale,
+    colorScale,
     xVal,
     yVal,
+    colorVal,
     data,
-    tooltipFormat
+    tooltipFormat,
+    radiusCircle
 }) =>
 {
     return (
         <g className="marks">
-            {data.map(dataPoint => (
+            {data.map((dataPoint,i) => (
                 <g
+                    key={i}
                     className="mark"
                     transform={`translate(
                         ${xScale(xVal(dataPoint))},
@@ -19,7 +23,8 @@ export const Marks = ({
                     }
                 >
                     <circle
-                        r={5}
+                        r={radiusCircle}
+                        fill={colorScale(colorVal(dataPoint))}
                     />
                     <title>
                         {tooltipFormat(yVal(dataPoint))}

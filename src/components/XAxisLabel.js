@@ -5,6 +5,7 @@ export const XAxisLabel = ({
     innerWidth
 }) => (
     <text
+        className="label-text"
         x={innerWidth/2}
         y={innerHeight + xAxisLabelOffset}
     >

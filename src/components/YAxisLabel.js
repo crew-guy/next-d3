@@ -4,9 +4,10 @@ export const YAxisLabel = ({
     innerHeight,
 }) => (
     <text
+        className="label-text"
         transform={`
         translate(
-            ${-yAxisLabelOffset},
+            ${yAxisLabelOffset},
             ${innerHeight / 2})
             ,rotate(-90)`
         }

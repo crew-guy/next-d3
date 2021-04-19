@@ -5,11 +5,11 @@ export const AxisBottom = ({
     xAxisTickOffset
     }) =>
 {
-    console.log(innerHeight)
     return (
         <g className='x-axis-labels' >
             {xScale.ticks().map(tickValue => (
                 <g
+                    key={tickValue}
                     className="x-label labels"
                     transform={`translate(${xScale(tickValue)},0)`}
                 >

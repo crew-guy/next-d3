@@ -8,6 +8,7 @@ export const AxisLeft = ({
         {yScale.ticks().map(tickValue => (
             <g
                 className="y-label labels"
+                key={tickValue}
                 transform={`translate(0,${yScale(tickValue)}) `} >
                 <line
                     x2={innerWidth}
