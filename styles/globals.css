@@ -1,16 +1,47 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.marks .feature {
+	fill: #137b80;
+	stroke: #42a5b3;
+	stroke-width: 2;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
+.marks .sphere {
+	fill: #ececec;
+}
+
+.interiors {
+	fill: none;
+	stroke: #c3c3c3;
+}
+
+.marks .graticules {
+	fill: none;
+	stroke: #137b80;
+}
+
+.land {
+	fill: lightblue;
+}
+
+.city {
+	fill: #137b80;
+	opacity: 0.5;
 }
