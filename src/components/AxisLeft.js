@@ -1,8 +1,9 @@
 export default function AxisLeft ({yScale, innerWidth, yAxisTickOffset, tickFormat }) {
     return (
         <g className='y-axis-ticks'>
-            { yScale.ticks().map(tickValue => (
+            { yScale.ticks().map((tickValue,i) => (
                 <g
+                    key={i}
                     className="ticks"
                     transform={`translate(0,${yScale(tickValue)})`}
                 >

@@ -1,26 +1,24 @@
 import {curveCardinal, curveStep, line } from 'd3'
 
-export default function Marks({ data, xScale, yScale, xVal, yVal, tooltipFormat, radiusCircle })
+export default function Marks({
+    binnedData,
+    xScale,
+    yScale,
+    tooltipFormat,
+    innerHeight
+})
 {
     return (
         <g className="marks" >
-            <path
-                d={
-                    line()
-                        .x(d => xScale(xVal(d)))
-                        .y(d => yScale(yVal(d)))
-                        .curve(curveCardinal)
-                        (data)
-                }
-            />
-            {data.map(dataPoint => (
-                <g className="mark">
-                    <circle
-                    cx={xScale(xVal(dataPoint))}
-                    cy={yScale(yVal(dataPoint))}
-                    r={radiusCircle}
+            {binnedData.map((dataPoint,i) => (
+                <g key={i} className="mark">
+                    <rect
+                        x={xScale(dataPoint.x0)}
+                        y={yScale(dataPoint.y)}
+                        width={xScale(dataPoint.x1) - xScale(dataPoint.x0)}
+                        height={innerHeight-yScale(dataPoint.y)}
                     />
-                    <title>{tooltipFormat(yVal(dataPoint))} </title>
+                    <title>{tooltipFormat(dataPoint.y)} </title>
                 </g>
                 )  )}
         </g>

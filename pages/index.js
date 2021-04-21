@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import {fetchData} from '@helpers/fetchData'
 import { useState, useEffect } from 'react'
 import { plotConfig } from '@helpers/config'
+import {bin, scaleLinear, max, timeMonths, sum} from 'd3'
 
 // Importing the components 
 import AxisLeft from '@components/AxisLeft'
@@ -11,19 +12,25 @@ import Marks from '@components/Marks'
 import XAxisLabel from '@components/XAxisLabel'
 import YAxisLabel from '@components/YAxisLabel'
 
-export default function Home({data}) {
+// export default function Home({data}) {
+export default function Home() {
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState(0)
-  // const [config, setConfig] = useState({})  
+  const [data, setData] = useState([])  
   
   // Fetching the browser's height and the width from the window object 
   useEffect(() =>
   {
+    (async () =>
+    {
+      const buffer = await fetchData()
+      setData(buffer)
+    })()
     setHeight(window.innerHeight)
     setWidth(window.innerWidth)
     // setConfig(plotConfig(data, height, width))
   }, [])
-  
+
   const margin = {
     top: 60,
     left: 140,
@@ -41,7 +48,7 @@ export default function Home({data}) {
     xVal,
     yVal,
     xScale,
-    yScale,
+    // yScale,
     xAxisLabel,
     yAxisLabel,
     xAxisLabelOffset,
@@ -53,8 +60,27 @@ export default function Home({data}) {
     tooltipFormat,
     radiusCircle
   } = config
-  // console.log({data})
 
+  const [start, stop] = xScale.domain()
+  
+  const binnedData = bin()
+    .value(xVal)
+    .domain(xScale.domain())
+    .thresholds(timeMonths(start, stop))(data)
+    .map(array => ({
+      y: sum(array, yVal),
+      x0: array.x0,
+      x1:array.x1
+    }))
+
+  // Gotta redefine yScale based on sums calculated in binnedData
+  const yScale = scaleLinear()
+    .domain([0, max(binnedData, d => d.y)])
+    .range([innerHeight,0])
+  
+  
+  // console.log(binnedData)
+  
   return (
       <svg height={height} width={width} >
       <g
@@ -75,12 +101,11 @@ export default function Home({data}) {
           tickFormat={yAxisTickFormat}
         />
         <Marks
-          data={data}
+          binnedData={binnedData}
           xScale={xScale}
           yScale={yScale}
-          xVal={xVal}
-          yVal={yVal}
           radiusCircle={radiusCircle}
+          innerHeight={innerHeight}
           tooltipFormat={tooltipFormat}
         />
         <XAxisLabel
@@ -99,10 +124,10 @@ export default function Home({data}) {
   )
 }
 
-export const getStaticProps = async () =>
-{
-  const data = await fetchData()
-  return {
-    props:{data}
-  }
-}
+// export const getStaticProps = async () =>
+// {
+//   const data = await fetchData()
+//   return {
+//     props:{data}
+//   }
+// }

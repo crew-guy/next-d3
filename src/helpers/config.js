@@ -5,8 +5,8 @@ export function plotConfig(data,innerHeight,innerWidth)
     const config = {}
 
     // INDIVIDUAL ITEM HANDLING
-    config.xVal = d => new Date(d.timestamp)
-    config.yVal = d => d.temperature
+    config.xVal = d => new Date(d['Reported Date'])
+    config.yVal = d => d['Total Dead and Missing']
 
     // SCALES
     config.xScale = scaleLinear()
@@ -20,13 +20,13 @@ export function plotConfig(data,innerHeight,innerWidth)
         .nice()
     
     // LABELS
-    config.xAxisLabel = 'Time'
-    config.yAxisLabel = 'Temperature'
+    config.xAxisLabel = 'Reported Date'
+    config.yAxisLabel = 'Total Dead and Missing'
     config.xAxisLabelOffset = 60
     config.yAxisLabelOffset = 60
 
     // TICKS
-    config.xAxisTickFormat = d =>  timeFormat("%a")(new Date(d)),
+    config.xAxisTickFormat = d =>  timeFormat("%j")(new Date(d)),
     config.yAxisTickFormat = d => d
     config.xAxisTickOffset = 14
     config.yAxisTickOffset = 14

@@ -2,8 +2,9 @@ export default function AxisBottom({ xScale, innerHeight, tickFormat, xAxisTickO
 {
     return (
         <g className="x-axis-ticks">
-            {xScale.ticks().map(tickValue => (
+            {xScale.ticks().map((tickValue,i) => (
                 <g
+                    key={i}
                     className='ticks'
                     transform={`translate(${xScale(tickValue)},0)`}
                 >
