@@ -8,7 +8,7 @@ export default function HistogramMarks({
 {
     return (
         <g className="marks" >
-            {binnedData.map((dataPoint,i) => (
+            {binnedData?.map((dataPoint,i) => (
                 <g key={i} className="mark">
                     <rect
                         x={xScale(dataPoint.x0)}
@@ -16,9 +16,12 @@ export default function HistogramMarks({
                         width={xScale(dataPoint.x1) - xScale(dataPoint.x0)}
                         height={innerHeight-yScale(dataPoint.y)}
                     />
-                    <title>{tooltipFormat(dataPoint.y)} </title>
+                    <title>
+                        {tooltipFormat(dataPoint.y)}
+                    </title>
                 </g>
-                )  )}
+            ))
+            }
         </g>
 
       )

@@ -15,7 +15,7 @@ const useInfo = async () =>
 
     try {
         const data = await csv(csvUrl, row)
-        console.log(data[0])
+        // console.log(data[0])
         return data
     } catch (error) {
         console.log(error.message)

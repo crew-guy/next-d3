@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useConfig } from '@contexts/ConfigContext'
 import BubbleMap from '@plots/BubbleMap'
+import DateHistogram from '@plots/DateHistogram'
 
 export default function Home()
 {
@@ -12,10 +13,11 @@ export default function Home()
     innerHeight,
     innerWidth,
     margin,
+    bubbleMapHeight,
+    dateHistogramHeight
   } = config
 
   return (
-    <div className={styles.container}>
       <svg
         height={height}
         width = {width}
@@ -25,10 +27,20 @@ export default function Home()
           width={innerWidth}
           transform={`translate(${margin.left},${margin.top})`}
         >
-            
+        <g
+          height={bubbleMapHeight}
+          width={innerWidth} >
+            <BubbleMap />
+          </g>
+          <g
+            height={dateHistogramHeight}
+            width={innerWidth} 
+            transform={`translate(0,${bubbleMapHeight + 50})`}
+          >
+            <DateHistogram/>
+          </g>
         </g>
       
       </svg>
-    </div>
   )
 }

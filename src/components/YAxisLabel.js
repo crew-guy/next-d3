@@ -5,7 +5,7 @@ export default function YAxisLabel  ({innerHeight, yAxisLabelOffset, yAxisLabel}
             transform={
                 `translate(
                     ${-yAxisLabelOffset},
-                    ${innerHeight / 2}
+                    ${innerHeight/2 + 100 }
                     ),
                 rotate(-90)`
             }

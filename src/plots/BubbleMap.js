@@ -15,10 +15,10 @@ const BubbleMap = () =>
   
     return (
         <MapMarks
-            data={data}
-            sizeScale={sizeScale}
-            sizeValue={sizeValue}
-          />
+          data={data}
+          sizeScale={sizeScale}
+          sizeValue={sizeValue}
+        />
     )
 }
 

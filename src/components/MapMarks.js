@@ -26,7 +26,7 @@ const Marks = ({ data, sizeScale, sizeValue }) =>
                         <path key={i} className="land" d={path(feature)} />
                     ))}
                     <path className="interiors" d={path(data.interiors)} />
-                    {data.data.map((d,i) =>
+                    {data.info.map((d,i) =>
                     {
                         const [x, y] = projection(d.coords)
                         return (

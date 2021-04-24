@@ -1,8 +1,14 @@
-export default function AxisBottom({ xScale, innerHeight, tickFormat, xAxisTickOffset }) 
+export default function AxisBottom(
+    {
+        xScale,
+        innerHeight,
+        tickFormat,
+        xAxisTickOffset
+    })
 {
     return (
         <g className="x-axis-ticks">
-            {xScale.ticks().map((tickValue,i) => (
+            {xScale?.ticks().map((tickValue,i) => (
                 <g
                     key={i}
                     className='ticks'

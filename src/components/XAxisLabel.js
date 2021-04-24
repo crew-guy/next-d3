@@ -1,4 +1,10 @@
-export default function XAxisLabel  ({innerHeight, innerWidth, xAxisLabelOffset, xAxisLabel}) {
+export default function XAxisLabel({
+    innerHeight,
+    innerWidth,
+    xAxisLabelOffset,
+    xAxisLabel
+})
+{
     return (
         <text
             className="labels"
@@ -8,5 +14,5 @@ export default function XAxisLabel  ({innerHeight, innerWidth, xAxisLabelOffset,
         >
             {xAxisLabel}
         </text>
-      )
-    }
+        )
+}

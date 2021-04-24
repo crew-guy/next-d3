@@ -1,7 +1,18 @@
 import React, {useState, useContext, useEffect } from 'react'
 import useWorldAtlas from '@hooks/useWorldAtlas'
 import useInfo from '@hooks/useInfo'
-import { scaleSqrt, scaleLinear, max, timeMonths, sum, extent } from 'd3'
+import
+    {
+        scaleSqrt,
+        scaleLinear,
+        max,
+        timeMonths,
+        sum,
+        extent,
+        bin,
+        timeFormat,
+        format
+    } from 'd3'
 
 const ConfigContext = React.createContext()
 
@@ -45,7 +56,11 @@ const ConfigProvider = ({children}) =>
         right:80,
     }
     config.innerHeight = height - config.margin.top - config.margin.bottom
-    config.innerWidth = height - config.margin.left - config.margin.right
+    config.innerWidth = width - config.margin.left - config.margin.right
+    config.bubbleMapHeight = config.innerHeight * 0.6
+    config.dateHistogramHeight = config.innerHeight*0.3
+    config.bubbleMapWidth = config.innerWidth
+    config.dateHistogramWidth = config.innerWidth
     
     //! BUBBLE MAP
     
@@ -71,19 +86,21 @@ const ConfigProvider = ({children}) =>
     {
         config.xScale = scaleLinear()
             .domain(extent(config.data.info,config.xVal))
-            .range([0, innerWidth])
+            .range([0, config.dateHistogramWidth])
             .nice()
+        
+        // console.log(config.xScale)
 
         // BINS
-        const [start, stop] = xScale.domain()
+        const [start, stop] = config.xScale.domain()
 
         const binnedData = bin()
-            .value(xVal)
-            .domain(xScale.domain())
+            .value(config.xVal)
+            .domain(config.xScale.domain())
             .thresholds(timeMonths(start, stop))(config.data.info)
         
         config.summedBinnedData = binnedData.map(array => ({
-            y: sum(array, yVal),
+            y: sum(array, config.yVal),
             x0: array.x0,
             x1:array.x1
         }))
@@ -91,9 +108,8 @@ const ConfigProvider = ({children}) =>
 
         // Gotta redefine yScale based on sums calculated in binnedData
         config.yScale = scaleLinear()
-            .domain([0, max(summedBinnedData, d => d.y)])
-            .range([innerHeight, 0])
-        
+            .domain([0, max(config.summedBinnedData, d => d.y)])
+            .range([config.dateHistogramHeight, 0])
     }
     
     // LABELS

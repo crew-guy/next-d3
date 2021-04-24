@@ -1,5 +1,3 @@
-import {bin, scaleLinear, max, timeMonths, sum} from 'd3'
-
 // Importing the components 
 import AxisLeft from '@components/AxisLeft'
 import AxisBottom from '@components/AxisBottom'
@@ -8,17 +6,16 @@ import XAxisLabel from '@components/XAxisLabel'
 import { useConfig } from '@contexts/ConfigContext'
 import YAxisLabel from '@components/YAxisLabel'
 
-// export default function Home({data}) {
 export default function DateHistogram() {
 
-  const config = useConfig
+  const config = useConfig()
 
   const {
-    xVal,
-    yVal,
+    dateHistogramHeight,
+    dateHistogramWidth,
     xScale,
-    summedBinnedData,
     yScale,
+    summedBinnedData,
     xAxisLabel,
     yAxisLabel,
     xAxisLabelOffset,
@@ -30,48 +27,40 @@ export default function DateHistogram() {
     tooltipFormat,
     radiusCircle
   } = config
-
-//   console.log(binnedData)
   
   return (
-      <svg height={height} width={width} >
-      <g
-        height={innerHeight}
-        width={innerWidth}
-        transform={`translate(${margin.left},${margin.top})`}
-      >
-        <AxisBottom
-          xScale={xScale}
-          innerHeight={innerHeight}
-          xAxisTickOffset={xAxisTickOffset}
-          tickFormat={xAxisTickFormat}
-        />
-        <AxisLeft
-          yScale={yScale}
-          yAxisTickOffset={yAxisTickOffset}
-          innerWidth={innerWidth}
-          tickFormat={yAxisTickFormat}
-        />
-        <HistogramMarks
-          binnedData={summedBinnedData}
-          xScale={xScale}
-          yScale={yScale}
-          radiusCircle={radiusCircle}
-          innerHeight={innerHeight}
-          tooltipFormat={tooltipFormat}
-        />
-        <XAxisLabel
-          innerHeight={innerHeight}
-          innerWidth={innerWidth}
-          xAxisLabelOffset={xAxisLabelOffset}
-          xAxisLabel={xAxisLabel}
-        />
-        <YAxisLabel
-          innerHeight={innerHeight}
-          yAxisLabelOffset={yAxisLabelOffset}
-          yAxisLabel={yAxisLabel}
-        />
-      </g>
-    </svg>
+    <>
+      <AxisBottom
+        xScale={xScale}
+        innerHeight={dateHistogramHeight}
+        xAxisTickOffset={xAxisTickOffset}
+        tickFormat={xAxisTickFormat}
+      />
+      <AxisLeft
+        yScale={yScale}
+        innerWidth={dateHistogramWidth}
+        yAxisTickOffset={yAxisTickOffset}
+        tickFormat={yAxisTickFormat}
+      />
+      <HistogramMarks
+        xScale={xScale}
+        yScale={yScale}
+        radiusCircle={radiusCircle}
+        innerHeight={dateHistogramHeight}
+        tooltipFormat={tooltipFormat}
+        binnedData={summedBinnedData}
+      />
+      <XAxisLabel
+        innerHeight={dateHistogramHeight}
+        innerWidth={dateHistogramWidth}
+        xAxisLabelOffset={xAxisLabelOffset}
+        xAxisLabel={xAxisLabel}
+      />
+      <YAxisLabel
+        innerHeight={dateHistogramHeight}
+        yAxisLabelOffset={yAxisLabelOffset}
+        yAxisLabel={yAxisLabel}
+      />
+    </>
   )
 }
