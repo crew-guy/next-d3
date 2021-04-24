@@ -23,13 +23,18 @@ export default function Home({countries, interiors}) {
     bottom:100
   }
 
+  const innerHeight = height - margin.top - margin.bottom
+  const innerWidth = width - margin.left - margin.right
+
   // console.log(countries)
 
   return (
       <svg height={height} width={width} >
+      <g className="marks" height={innerHeight} width={innerWidth} >
         <Marks
         countries={countries} interiors={interiors}
         />
+      </g>
     </svg>
   )
 }
