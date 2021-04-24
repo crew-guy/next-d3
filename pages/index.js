@@ -25,7 +25,7 @@ export default function Home()
           width={innerWidth}
           transform={`translate(${margin.left},${margin.top})`}
         >
-          <BubbleMap/>
+            
         </g>
       
       </svg>

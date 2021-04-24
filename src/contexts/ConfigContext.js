@@ -35,7 +35,7 @@ const ConfigProvider = ({children}) =>
     //! GENERAL SETUP
 
     config.data = data
-    console.log(data)
+    // console.log(data)
     config.height = height
     config.width = width
     config.margin = {
@@ -67,31 +67,33 @@ const ConfigProvider = ({children}) =>
     config.yVal = d => d['Total Dead and Missing']
     
     // SCALES
-    if (data)
+    if (config.data)
     {
         config.xScale = scaleLinear()
-            .domain(extent(config.data,config.xVal))
+            .domain(extent(config.data.info,config.xVal))
             .range([0, innerWidth])
             .nice()
-        
-      // Gotta redefine yScale based on sums calculated in binnedData
-        config.yScale = scaleLinear()
-            .domain([0, max(summedBinnedData, d => d.y)])
-            .range([innerHeight, 0])
-        
+
         // BINS
         const [start, stop] = xScale.domain()
 
         const binnedData = bin()
             .value(xVal)
             .domain(xScale.domain())
-            .thresholds(timeMonths(start, stop))(config.data)
+            .thresholds(timeMonths(start, stop))(config.data.info)
         
         config.summedBinnedData = binnedData.map(array => ({
             y: sum(array, yVal),
             x0: array.x0,
             x1:array.x1
         }))
+
+
+        // Gotta redefine yScale based on sums calculated in binnedData
+        config.yScale = scaleLinear()
+            .domain([0, max(summedBinnedData, d => d.y)])
+            .range([innerHeight, 0])
+        
     }
     
     // LABELS
