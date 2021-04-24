@@ -25,7 +25,8 @@ a {
 	font-size: 2rem;
 }
 
-.marks circle {
+.marks circle,
+rect {
 	fill: #42a5b3;
 }
 
