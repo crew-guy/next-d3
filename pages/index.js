@@ -67,19 +67,26 @@ export default function Home() {
     .value(xVal)
     .domain(xScale.domain())
     .thresholds(timeMonths(start, stop))(data)
-    .map(array => ({
-      y: sum(array, yVal),
-      x0: array.x0,
-      x1:array.x1
-    }))
+  
+  const summedBinnedData = binnedData.map(array => ({
+    y: sum(array, yVal),
+    x0: array.x0,
+    x1:array.x1
+  }))
 
+  console.log(bin()
+  .value(xVal)
+  .domain(xScale.domain())
+  .thresholds(timeMonths(start, stop))
+  (data))
+  
   // Gotta redefine yScale based on sums calculated in binnedData
   const yScale = scaleLinear()
-    .domain([0, max(binnedData, d => d.y)])
+    .domain([0, max(summedBinnedData, d => d.y)])
     .range([innerHeight,0])
   
   
-  // console.log(binnedData)
+  console.log(binnedData)
   
   return (
       <svg height={height} width={width} >
@@ -101,7 +108,7 @@ export default function Home() {
           tickFormat={yAxisTickFormat}
         />
         <Marks
-          binnedData={binnedData}
+          binnedData={summedBinnedData}
           xScale={xScale}
           yScale={yScale}
           radiusCircle={radiusCircle}

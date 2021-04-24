@@ -1,5 +1,3 @@
-import {curveCardinal, curveStep, line } from 'd3'
-
 export default function Marks({
     binnedData,
     xScale,
