@@ -1,5 +1,5 @@
 import React from 'react'
-import useSWR from 'swr'
+// import useSWR from 'swr'
 import {csvParse} from 'd3'
 
 export const useData = async () => {
