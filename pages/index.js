@@ -1,22 +1,19 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useConfig } from '@contexts/ConfigContext'
-import Marks from '@components/Marks'
+import BubbleMap from '@plots/BubbleMap'
 
 export default function Home()
 {
   const config = useConfig()
-  // console.log(config)
   const {
     height,
     width,
     innerHeight,
     innerWidth,
-    data,
     margin,
-    sizeScale,
-    sizeValue
   } = config
+
   return (
     <div className={styles.container}>
       <svg
@@ -28,11 +25,7 @@ export default function Home()
           width={innerWidth}
           transform={`translate(${margin.left},${margin.top})`}
         >
-          <Marks
-            data={data}
-            sizeScale={sizeScale}
-            sizeValue={sizeValue}
-          />
+          <BubbleMap/>
         </g>
       
       </svg>

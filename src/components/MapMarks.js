@@ -12,7 +12,6 @@ const Marks = ({ data, sizeScale, sizeValue }) =>
     useEffect(() =>
     {
         setLoading(data === undefined)
-        console.log(data.countries)
     },[data])
     
     return (
@@ -23,15 +22,15 @@ const Marks = ({ data, sizeScale, sizeValue }) =>
                 <>
                     <path className="sphere" d={path({ type: 'Sphere' })} />
                     <path className="graticules" d={path(graticule())} />
-                    {data && data.countries.features.map(feature => (
-                        <path className="land" d={path(feature)} />
+                    {data && data.countries.features.map((feature,i) => (
+                        <path key={i} className="land" d={path(feature)} />
                     ))}
                     <path className="interiors" d={path(data.interiors)} />
-                    {data.cities.map(d =>
+                    {data.data.map((d,i) =>
                     {
-                        const [x, y] = projection([d.lng, d.lat])
+                        const [x, y] = projection(d.coords)
                         return (
-                            <circle className="city" cx={x} cy={y} r={sizeScale(sizeValue(d))}/>
+                            <circle key={i} className="city" cx={x} cy={y} r={sizeScale(sizeValue(d))}/>
                         )
                     })}
                 </>

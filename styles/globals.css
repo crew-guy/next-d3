@@ -15,6 +15,28 @@ a {
 	box-sizing: border-box;
 }
 
+.ticks,
+.labels {
+	stroke: gray;
+	color: gray;
+}
+.labels {
+	fill: gray;
+	font-size: 2rem;
+}
+
+.marks circle {
+	fill: #42a5b3;
+}
+
+.marks path {
+	fill: none;
+	stroke: #42a5b3;
+	stroke-width: 8;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
 .marks .feature {
 	fill: #137b80;
 	stroke: #42a5b3;

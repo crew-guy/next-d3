@@ -6,7 +6,7 @@ const useWorldAtlas = async () => {
 
     const topojsonData = await json(jsonUrl)
     const {countries} = topojsonData.objects
-    console.log(topojsonData)
+    // console.log(topojsonData)
 
     return {
         countries: feature(topojsonData, countries),

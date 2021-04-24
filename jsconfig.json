@@ -6,6 +6,7 @@
             "@helpers/*":["./src/helpers/*"],
             "@contexts/*":["./src/contexts/*"],
             "@hooks/*":["./src/hooks/*"],
+            "@plots/*":["./src/plots/*"]
         },
     }
 }
