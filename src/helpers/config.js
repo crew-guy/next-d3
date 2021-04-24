@@ -8,6 +8,7 @@ export function plotConfig(data,innerHeight,innerWidth)
     config.xVal = d => new Date(d['Reported Date'])
     config.yVal = d => d['Total Dead and Missing']
 
+    console.log(data)
     // SCALES
     config.xScale = scaleLinear()
         .domain(extent(data,config.xVal))
