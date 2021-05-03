@@ -1,3 +1,4 @@
+
 export default function AxisLeft ({yScale, innerWidth, yAxisTickOffset, tickFormat }) {
     return (
         <g className='y-axis-ticks'>

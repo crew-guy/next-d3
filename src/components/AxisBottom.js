@@ -1,3 +1,4 @@
+
 export default function AxisBottom({ xScale, innerHeight, tickFormat, xAxisTickOffset }) 
 {
     return (

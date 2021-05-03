@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 html,
 body {
 	padding: 0;
@@ -17,14 +19,62 @@ a {
 
 .ticks,
 .labels {
-	stroke: gray;
+	color: grey;
+	stroke: grey;
+	fill: grey;
+}
+
+.c-panel {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.Dropdown-root {
+	display: inline-flex;
+	margin: 1rem 1rem 0 1rem;
+}
+
+.legend {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.color-legend-div {
+	height: 10px;
+	width: 10px;
+	margin-right: 0.5rem;
+}
+
+.legend-item {
+	display: flex;
+	margin-right: 2rem;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+}
+
+.legend-item-alternate {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.label-text {
+	font-size: 2.3rem;
+	color: grey;
+}
+
+.interactivity {
+	transition: 0.3s ease-in;
+.ticks,
+.labels {
+  stroke: gray;
 	color: gray;
 }
 .labels {
 	fill: gray;
-	font-size: 2rem;
-}
-
 .marks circle,
 rect {
 	fill: #42a5b3;
@@ -33,7 +83,39 @@ rect {
 .marks path {
 	fill: none;
 	stroke: #42a5b3;
-	stroke-width: 8;
+
+	stroke-width: 1;
 	stroke-linejoin: round;
 	stroke-linecap: round;
+}
+
+.marks .feature {
+	fill: #137b80;
+	stroke: #42a5b3;
+	stroke-width: 2;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
+.marks .sphere {
+	fill: #ececec;
+}
+
+.interiors {
+	fill: none;
+	stroke: #c3c3c3;
+}
+
+.marks .graticules {
+	fill: none;
+	stroke: #137b80;
+}
+
+.land {
+	fill: lightblue;
+}
+
+.city {
+	fill: #137b80;
+	opacity: 0.5;
 }

@@ -1,3 +1,4 @@
+
 export default function YAxisLabel  ({innerHeight, yAxisLabelOffset, yAxisLabel}) {
     return (
         <text

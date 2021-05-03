@@ -1,3 +1,4 @@
+
 import * as d3 from 'd3'
 
 export const fetchData = async () =>
@@ -13,3 +14,4 @@ export const fetchData = async () =>
     const data = await d3.csv(csvUrl,row)
     return data
 }
+

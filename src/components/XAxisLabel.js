@@ -1,3 +1,4 @@
+
 export default function XAxisLabel  ({innerHeight, innerWidth, xAxisLabelOffset, xAxisLabel}) {
     return (
         <text
