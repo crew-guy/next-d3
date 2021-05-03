@@ -1,3 +1,4 @@
+
 export const AxisBottom = ({
     xScale,
     innerHeight,

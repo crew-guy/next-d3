@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from 'react'
 // import fetchData from '@helpers/fetchData'
 import {scaleLinear, max, extent, scaleOrdinal} from 'd3'
@@ -126,6 +127,7 @@ const ConfigProvider = ({ children }) =>
     //* INTERACTIVITY
     config.fadeOpacity = FADE_OPACITY
     
+
     return (
         <ConfigContext.Provider value={config} >
             {children}

@@ -1,3 +1,4 @@
+
 import {csvParse, csv, csvFormat} from 'd3'
 
 export const fetchData = async () =>
@@ -16,3 +17,4 @@ export const fetchData = async () =>
 }
 
 export default fetchData
+
