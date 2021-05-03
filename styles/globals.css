@@ -4,7 +4,6 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: 'Poppins';
 }
 
 a {
@@ -15,17 +14,56 @@ a {
 * {
 	box-sizing: border-box;
 }
-
-.tick line,
-.tick text {
-	stroke: #c0c0bb;
+.ticks,
+.labels {
+	stroke: gray;
+	color: gray;
+}
+.labels {
+	fill: gray;
+	font-size: 1rem;
 }
 
-.mark {
+.marks circle,
+rect {
+	fill: #42a5b3;
+}
+
+.marks path {
+	fill: none;
+	stroke: #42a5b3;
+	stroke-width: 1;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
+.marks .feature {
 	fill: #137b80;
+	stroke: #42a5b3;
+	stroke-width: 2;
+	stroke-linejoin: round;
+	stroke-linecap: round;
 }
 
-.axis-label {
-	fill: #868681;
-	font-size: 2rem;
+.marks .sphere {
+	fill: #ececec;
+}
+
+.interiors {
+	fill: none;
+	stroke: #c3c3c3;
+}
+
+.marks .graticules {
+	fill: none;
+	stroke: #137b80;
+}
+
+.land {
+	fill: lightblue;
+}
+
+.city {
+	fill: #137b80;
+	opacity: 0.5;
 }

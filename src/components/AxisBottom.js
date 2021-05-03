@@ -1,15 +1,31 @@
-export const AxisBottom = ({yScale}) => (
-    yScale.domain().map(tickValue=>(
-        <g className="tick">
-            <text
-            key={tickValue}
-            x={-3}
-            style={{textAnchor: 'end'}}
-            dy="0.32em"
-            y={yScale(tickValue) + yScale.bandwidth()/2}
-            >
-            {tickValue}
-            </text>
+
+export default function AxisBottom(
+    {
+        xScale,
+        innerHeight,
+        tickFormat,
+        xAxisTickOffset
+    })
+{
+    return (
+        <g className="x-axis-ticks">
+            {xScale?.ticks().map((tickValue,i) => (
+                <g
+                    key={i}
+                    className='ticks'
+                    transform={`translate(${xScale(tickValue)},0)`}
+                >
+                    <line y2={innerHeight} />
+                    <text
+                        textAnchor='middle'
+                        y={innerHeight + xAxisTickOffset}
+                        dy="0.65em"
+                    >
+                        {tickFormat(tickValue)}
+                    </text>
+                </g>
+                ))
+            }
         </g>
-    ))
-)
+    )
+}
