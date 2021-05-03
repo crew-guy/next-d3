@@ -70,14 +70,11 @@ a {
 	transition: 0.3s ease-in;
 .ticks,
 .labels {
-	stroke: gray;
+  stroke: gray;
 	color: gray;
 }
 .labels {
 	fill: gray;
-	font-size: 1rem;
-}
-
 .marks circle,
 rect {
 	fill: #42a5b3;
@@ -86,6 +83,7 @@ rect {
 .marks path {
 	fill: none;
 	stroke: #42a5b3;
+
 	stroke-width: 1;
 	stroke-linejoin: round;
 	stroke-linecap: round;

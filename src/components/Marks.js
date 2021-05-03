@@ -1,38 +1,26 @@
 
-export const Marks = ({
+export default function Marks({
+    binnedData,
     xScale,
     yScale,
-    colorScale,
-    xVal,
-    yVal,
-    colorVal,
-    data,
     tooltipFormat,
-    radiusCircle
-}) =>
+    innerHeight
+})
 {
     return (
-        <g className="marks">
-            {data.map((dataPoint,i) => (
-                <g
-                    key={i}
-                    className="mark"
-                    transform={`translate(
-                        ${xScale(xVal(dataPoint))},
-                        ${yScale(yVal(dataPoint))}
-                        ) `
-                    }
-                >
-                    <circle
-                        r={radiusCircle}
-                        fill={colorScale(colorVal(dataPoint))}
+        <g className="marks" >
+            {binnedData.map((dataPoint,i) => (
+                <g key={i} className="mark">
+                    <rect
+                        x={xScale(dataPoint.x0)}
+                        y={yScale(dataPoint.y)}
+                        width={xScale(dataPoint.x1) - xScale(dataPoint.x0)}
+                        height={innerHeight-yScale(dataPoint.y)}
                     />
-                    <title>
-                        {tooltipFormat(yVal(dataPoint))}
-                    </title>
+                    <title>{tooltipFormat(dataPoint.y)} </title>
                 </g>
-            ) )}
+                )  )}
         </g>
-    )
-}
 
+      )
+    }
