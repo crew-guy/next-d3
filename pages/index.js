@@ -1,65 +1,75 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import axios from 'axios'
+import * as d3 from 'd3'
+import React,{useState, useEffect} from 'react'
+    
+export default function Home ({data,text})
+{
+  console.log(`${text.length / 1024} kB`)
+  console.log(`${data.length} rows`)
+  
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  });
+  
+  const pieArc = d3.arc()
+  .innerRadius(0)
+  .outerRadius(width)
+  
+  const colorPie = d3.pie().value(1)
 
-export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <svg width={width} height={height}>
+        <g transform={`translate(${width/2}, ${height/2})`} >
+          
+          //? Using d3.pie()
+          {colorPie(data).map(d => (
+            <path
+              fill={d.data['Hex']}
+              d={pieArc(d)}
+            />
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+          ))}  
+        
+          
+          //? Standard approach
+          {/*props.data.map((d, i) => (
+            <path
+              fill={d['Hex']}
+              d={pieArc({
+              startAngle: (i/data.length)*2*Math.PI,
+              endAngle: ((i+1)/data.length)*2*Math.PI
+            })}/>
+          ))*/}
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+          
+        </g>  
+      </svg>
     </div>
   )
+}
+
+
+export const getStaticProps = async() =>
+{
+  const csvUrl = "https://gist.githubusercontent.com/crew-guy/7cbac5e5cf2dbac4ab6a4c5e43e6f70d/raw/data.csv"
+  
+  //? M1 => Using d3.csvParse() function
+  // const unParsedata = await fetch(csvUrl)
+  // const text = await unParsedata.text()
+  // const data = d3.csvParse(text)
+
+
+  //? M2 => Using d3.csv()
+  const data = await d3.csv(csvUrl)
+  const text =  d3.csvFormat(data)
+
+  return {
+    props: {data, text}
+  }
 }
