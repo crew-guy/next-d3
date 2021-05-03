@@ -1,31 +1,32 @@
 
-export default function AxisBottom(
-    {
-        xScale,
-        innerHeight,
-        tickFormat,
-        xAxisTickOffset
-    })
+export const AxisBottom = ({
+    xScale,
+    innerHeight,
+    xAxisTickFormat,
+    xAxisTickOffset
+    }) =>
 {
     return (
-        <g className="x-axis-ticks">
-            {xScale?.ticks().map((tickValue,i) => (
+        <g className='x-axis-labels' >
+            {xScale.ticks().map(tickValue => (
                 <g
-                    key={i}
-                    className='ticks'
+                    key={tickValue}
+                    className="x-label labels"
                     transform={`translate(${xScale(tickValue)},0)`}
                 >
-                    <line y2={innerHeight} />
+                    <line
+                        y2={innerHeight}
+                    />
                     <text
-                        textAnchor='middle'
+                        textAnchor="middle"
+                        dy="0.6em"
                         y={innerHeight + xAxisTickOffset}
-                        dy="0.65em"
                     >
-                        {tickFormat(tickValue)}
+                        {xAxisTickFormat(tickValue)}
                     </text>
                 </g>
-                ))
-            }
+            ))}
         </g>
-    )
+
+  )
 }

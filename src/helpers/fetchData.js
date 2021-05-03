@@ -1,24 +1,20 @@
-import * as d3 from 'd3'
 
-export const fetchData = async() => {
-    const csvUrl = "https://gist.githubusercontent.com/crew-guy/e1ae0b5db6ace5eda68bc8fb9e903576/raw/UN%2520World%2520Population%2520Dataset%2520-%2520Sheet1.csv"
+import {csvParse, csv, csvFormat} from 'd3'
 
-    //? Using d3.csvParse()
-    // const unparsedData = await fetch(csvUrl)
-    // const text = await unparsedData.text()
-    // const data = d3.csvParse(text)
-    // console.log(data)
-
-    //? Using d3.csv()
-    const row = (d) => {
-        d.Population = +d['2020']
-        return d
+export const fetchData = async () =>
+{
+    const row = d => {
+        d.sepal_length = +d.sepal_length,
+        d.sepal_width = +d.sepal_width,
+        d.petal_width = +d.petal_width,
+        d.petal_length = +d.petal_length
     }
-    const fullData = await d3.csv(csvUrl, row)
-    const data = fullData.slice(0,10)
-    // const data = await d3.csv(csvUrl)
-    const text = d3.csvFormat(data)
-    // console.log(dataDirect)
-    // console.log(data)
-    return data;
+    const csvUrl = "https://gist.githubusercontent.com/crew-guy/cd33a96418d10e1a520e87dbf8a3162f/raw/data.csv"
+    // const data = await csv(csvUrl,row)
+    const data = await csv(csvUrl)
+    const text = await csvFormat(data)
+    return data
 }
+
+export default fetchData
+

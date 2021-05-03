@@ -3,10 +3,9 @@
         "baseUrl": "./",
         "paths":{
             "@components/*":["./src/components/*"],
-            "@helpers/*":["./src/helpers/*"],
             "@contexts/*":["./src/contexts/*"],
-            "@hooks/*":["./src/hooks/*"],
-            "@plots/*":["./src/plots/*"]
-        },
-    }
+            "@helpers/*":["./src/helpers/*"],
+            "@hooks/*":["./src/hooks/*"]
+        }
+
 }

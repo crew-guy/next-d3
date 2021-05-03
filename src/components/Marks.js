@@ -1,18 +1,38 @@
-export const Marks = ({data, xScale, yScale, xVal, yVal, toolTipFormat}) => (
-    data.map(d =>
-    {
-        console.log(xVal(d))
-        return (
-            <g>
-                <rect className="mark"
-                    key={yVal(d)}
-                    x={0}
-                    y={yScale(yVal(d))}
-                    width={xScale(xVal(d))}
-                    height={yScale.bandwidth()}
-                />
-                <title>{toolTipFormat(xVal(d))}</title>
-            </g>
-        )
-    })
-)
+
+export const Marks = ({
+    xScale,
+    yScale,
+    colorScale,
+    xVal,
+    yVal,
+    colorVal,
+    data,
+    tooltipFormat,
+    radiusCircle
+}) =>
+{
+    return (
+        <g className="marks">
+            {data.map((dataPoint,i) => (
+                <g
+                    key={i}
+                    className="mark"
+                    transform={`translate(
+                        ${xScale(xVal(dataPoint))},
+                        ${yScale(yVal(dataPoint))}
+                        ) `
+                    }
+                >
+                    <circle
+                        r={radiusCircle}
+                        fill={colorScale(colorVal(dataPoint))}
+                    />
+                    <title>
+                        {tooltipFormat(yVal(dataPoint))}
+                    </title>
+                </g>
+            ) )}
+        </g>
+    )
+}
+

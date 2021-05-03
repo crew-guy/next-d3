@@ -1,18 +1,15 @@
-export default function XAxisLabel({
-    innerHeight,
-    innerWidth,
+
+export const XAxisLabel = ({
+    xAxisLabel,
     xAxisLabelOffset,
-    xAxisLabel
-})
-{
-    return (
-        <text
-            className="labels"
-            x={innerWidth / 2}
-            y={xAxisLabelOffset + innerHeight}
-            textAnchor="middle"
-        >
-            {xAxisLabel}
-        </text>
-        )
-}
+    innerHeight,
+    innerWidth
+}) => (
+    <text
+        className="label-text"
+        x={innerWidth/2}
+        y={innerHeight + xAxisLabelOffset}
+    >
+        {xAxisLabel}
+    </text>
+)

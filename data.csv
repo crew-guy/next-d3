@@ -1,151 +1,152 @@
-Specification,Keyword,RGB hex value
-CSS Level 1,black,#000000
-CSS Level 1,silver,#c0c0c0
-CSS Level 1,gray,#808080
-CSS Level 1,white,#ffffff
-CSS Level 1,maroon,#800000
-CSS Level 1,red,#ff0000
-CSS Level 1,purple,#800080
-CSS Level 1,fuchsia,#ff00ff
-CSS Level 1,green,#008000
-CSS Level 1,lime,#00ff00
-CSS Level 1,olive,#808000
-CSS Level 1,yellow,#ffff00
-CSS Level 1,navy,#000080
-CSS Level 1,blue,#0000ff
-CSS Level 1,teal,#008080
-CSS Level 1,aqua,#00ffff
-CSS Level 2 (Revision 1),orange,#ffa500
-CSS Color Module Level 3,aliceblue,#f0f8ff
-CSS Color Module Level 3,antiquewhite,#faebd7
-CSS Color Module Level 3,aquamarine,#7fffd4
-CSS Color Module Level 3,azure,#f0ffff
-CSS Color Module Level 3,beige,#f5f5dc
-CSS Color Module Level 3,bisque,#ffe4c4
-CSS Color Module Level 3,blanchedalmond,#ffebcd
-CSS Color Module Level 3,blueviolet,#8a2be2
-CSS Color Module Level 3,brown,#a52a2a
-CSS Color Module Level 3,burlywood,#deb887
-CSS Color Module Level 3,cadetblue,#5f9ea0
-CSS Color Module Level 3,chartreuse,#7fff00
-CSS Color Module Level 3,chocolate,#d2691e
-CSS Color Module Level 3,coral,#ff7f50
-CSS Color Module Level 3,cornflowerblue,#6495ed
-CSS Color Module Level 3,cornsilk,#fff8dc
-CSS Color Module Level 3,crimson,#dc143c
-CSS Color Module Level 3,"cyan
-(synonym of aqua)",#00ffff
-CSS Color Module Level 3,darkblue,#00008b
-CSS Color Module Level 3,darkcyan,#008b8b
-CSS Color Module Level 3,darkgoldenrod,#b8860b
-CSS Color Module Level 3,darkgray,#a9a9a9
-CSS Color Module Level 3,darkgreen,#006400
-CSS Color Module Level 3,darkgrey,#a9a9a9
-CSS Color Module Level 3,darkkhaki,#bdb76b
-CSS Color Module Level 3,darkmagenta,#8b008b
-CSS Color Module Level 3,darkolivegreen,#556b2f
-CSS Color Module Level 3,darkorange,#ff8c00
-CSS Color Module Level 3,darkorchid,#9932cc
-CSS Color Module Level 3,darkred,#8b0000
-CSS Color Module Level 3,darksalmon,#e9967a
-CSS Color Module Level 3,darkseagreen,#8fbc8f
-CSS Color Module Level 3,darkslateblue,#483d8b
-CSS Color Module Level 3,darkslategray,#2f4f4f
-CSS Color Module Level 3,darkslategrey,#2f4f4f
-CSS Color Module Level 3,darkturquoise,#00ced1
-CSS Color Module Level 3,darkviolet,#9400d3
-CSS Color Module Level 3,deeppink,#ff1493
-CSS Color Module Level 3,deepskyblue,#00bfff
-CSS Color Module Level 3,dimgray,#696969
-CSS Color Module Level 3,dimgrey,#696969
-CSS Color Module Level 3,dodgerblue,#1e90ff
-CSS Color Module Level 3,firebrick,#b22222
-CSS Color Module Level 3,floralwhite,#fffaf0
-CSS Color Module Level 3,forestgreen,#228b22
-CSS Color Module Level 3,gainsboro,#dcdcdc
-CSS Color Module Level 3,ghostwhite,#f8f8ff
-CSS Color Module Level 3,gold,#ffd700
-CSS Color Module Level 3,goldenrod,#daa520
-CSS Color Module Level 3,greenyellow,#adff2f
-CSS Color Module Level 3,grey,#808080
-CSS Color Module Level 3,honeydew,#f0fff0
-CSS Color Module Level 3,hotpink,#ff69b4
-CSS Color Module Level 3,indianred,#cd5c5c
-CSS Color Module Level 3,indigo,#4b0082
-CSS Color Module Level 3,ivory,#fffff0
-CSS Color Module Level 3,khaki,#f0e68c
-CSS Color Module Level 3,lavender,#e6e6fa
-CSS Color Module Level 3,lavenderblush,#fff0f5
-CSS Color Module Level 3,lawngreen,#7cfc00
-CSS Color Module Level 3,lemonchiffon,#fffacd
-CSS Color Module Level 3,lightblue,#add8e6
-CSS Color Module Level 3,lightcoral,#f08080
-CSS Color Module Level 3,lightcyan,#e0ffff
-CSS Color Module Level 3,lightgoldenrodyellow,#fafad2
-CSS Color Module Level 3,lightgray,#d3d3d3
-CSS Color Module Level 3,lightgreen,#90ee90
-CSS Color Module Level 3,lightgrey,#d3d3d3
-CSS Color Module Level 3,lightpink,#ffb6c1
-CSS Color Module Level 3,lightsalmon,#ffa07a
-CSS Color Module Level 3,lightseagreen,#20b2aa
-CSS Color Module Level 3,lightskyblue,#87cefa
-CSS Color Module Level 3,lightslategray,#778899
-CSS Color Module Level 3,lightslategrey,#778899
-CSS Color Module Level 3,lightsteelblue,#b0c4de
-CSS Color Module Level 3,lightyellow,#ffffe0
-CSS Color Module Level 3,limegreen,#32cd32
-CSS Color Module Level 3,linen,#faf0e6
-CSS Color Module Level 3,"magenta
-(synonym of fuchsia)",#ff00ff
-CSS Color Module Level 3,mediumaquamarine,#66cdaa
-CSS Color Module Level 3,mediumblue,#0000cd
-CSS Color Module Level 3,mediumorchid,#ba55d3
-CSS Color Module Level 3,mediumpurple,#9370db
-CSS Color Module Level 3,mediumseagreen,#3cb371
-CSS Color Module Level 3,mediumslateblue,#7b68ee
-CSS Color Module Level 3,mediumspringgreen,#00fa9a
-CSS Color Module Level 3,mediumturquoise,#48d1cc
-CSS Color Module Level 3,mediumvioletred,#c71585
-CSS Color Module Level 3,midnightblue,#191970
-CSS Color Module Level 3,mintcream,#f5fffa
-CSS Color Module Level 3,mistyrose,#ffe4e1
-CSS Color Module Level 3,moccasin,#ffe4b5
-CSS Color Module Level 3,navajowhite,#ffdead
-CSS Color Module Level 3,oldlace,#fdf5e6
-CSS Color Module Level 3,olivedrab,#6b8e23
-CSS Color Module Level 3,orangered,#ff4500
-CSS Color Module Level 3,orchid,#da70d6
-CSS Color Module Level 3,palegoldenrod,#eee8aa
-CSS Color Module Level 3,palegreen,#98fb98
-CSS Color Module Level 3,paleturquoise,#afeeee
-CSS Color Module Level 3,palevioletred,#db7093
-CSS Color Module Level 3,papayawhip,#ffefd5
-CSS Color Module Level 3,peachpuff,#ffdab9
-CSS Color Module Level 3,peru,#cd853f
-CSS Color Module Level 3,pink,#ffc0cb
-CSS Color Module Level 3,plum,#dda0dd
-CSS Color Module Level 3,powderblue,#b0e0e6
-CSS Color Module Level 3,rosybrown,#bc8f8f
-CSS Color Module Level 3,royalblue,#4169e1
-CSS Color Module Level 3,saddlebrown,#8b4513
-CSS Color Module Level 3,salmon,#fa8072
-CSS Color Module Level 3,sandybrown,#f4a460
-CSS Color Module Level 3,seagreen,#2e8b57
-CSS Color Module Level 3,seashell,#fff5ee
-CSS Color Module Level 3,sienna,#a0522d
-CSS Color Module Level 3,skyblue,#87ceeb
-CSS Color Module Level 3,slateblue,#6a5acd
-CSS Color Module Level 3,slategray,#708090
-CSS Color Module Level 3,slategrey,#708090
-CSS Color Module Level 3,snow,#fffafa
-CSS Color Module Level 3,springgreen,#00ff7f
-CSS Color Module Level 3,steelblue,#4682b4
-CSS Color Module Level 3,tan,#d2b48c
-CSS Color Module Level 3,thistle,#d8bfd8
-CSS Color Module Level 3,tomato,#ff6347
-CSS Color Module Level 3,turquoise,#40e0d0
-CSS Color Module Level 3,violet,#ee82ee
-CSS Color Module Level 3,wheat,#f5deb3
-CSS Color Module Level 3,whitesmoke,#f5f5f5
-CSS Color Module Level 3,yellowgreen,#9acd32
-CSS Color Module Level 4,rebeccapurple,#663399
+
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+5.4,3.7,1.5,0.2,setosa
+4.8,3.4,1.6,0.2,setosa
+4.8,3.0,1.4,0.1,setosa
+4.3,3.0,1.1,0.1,setosa
+5.8,4.0,1.2,0.2,setosa
+5.7,4.4,1.5,0.4,setosa
+5.4,3.9,1.3,0.4,setosa
+5.1,3.5,1.4,0.3,setosa
+5.7,3.8,1.7,0.3,setosa
+5.1,3.8,1.5,0.3,setosa
+5.4,3.4,1.7,0.2,setosa
+5.1,3.7,1.5,0.4,setosa
+4.6,3.6,1.0,0.2,setosa
+5.1,3.3,1.7,0.5,setosa
+4.8,3.4,1.9,0.2,setosa
+5.0,3.0,1.6,0.2,setosa
+5.0,3.4,1.6,0.4,setosa
+5.2,3.5,1.5,0.2,setosa
+5.2,3.4,1.4,0.2,setosa
+4.7,3.2,1.6,0.2,setosa
+4.8,3.1,1.6,0.2,setosa
+5.4,3.4,1.5,0.4,setosa
+5.2,4.1,1.5,0.1,setosa
+5.5,4.2,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+5.0,3.2,1.2,0.2,setosa
+5.5,3.5,1.3,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+4.4,3.0,1.3,0.2,setosa
+5.1,3.4,1.5,0.2,setosa
+5.0,3.5,1.3,0.3,setosa
+4.5,2.3,1.3,0.3,setosa
+4.4,3.2,1.3,0.2,setosa
+5.0,3.5,1.6,0.6,setosa
+5.1,3.8,1.9,0.4,setosa
+4.8,3.0,1.4,0.3,setosa
+5.1,3.8,1.6,0.2,setosa
+4.6,3.2,1.4,0.2,setosa
+5.3,3.7,1.5,0.2,setosa
+5.0,3.3,1.4,0.2,setosa
+7.0,3.2,4.7,1.4,versicolor
+6.4,3.2,4.5,1.5,versicolor
+6.9,3.1,4.9,1.5,versicolor
+5.5,2.3,4.0,1.3,versicolor
+6.5,2.8,4.6,1.5,versicolor
+5.7,2.8,4.5,1.3,versicolor
+6.3,3.3,4.7,1.6,versicolor
+4.9,2.4,3.3,1.0,versicolor
+6.6,2.9,4.6,1.3,versicolor
+5.2,2.7,3.9,1.4,versicolor
+5.0,2.0,3.5,1.0,versicolor
+5.9,3.0,4.2,1.5,versicolor
+6.0,2.2,4.0,1.0,versicolor
+6.1,2.9,4.7,1.4,versicolor
+5.6,2.9,3.6,1.3,versicolor
+6.7,3.1,4.4,1.4,versicolor
+5.6,3.0,4.5,1.5,versicolor
+5.8,2.7,4.1,1.0,versicolor
+6.2,2.2,4.5,1.5,versicolor
+5.6,2.5,3.9,1.1,versicolor
+5.9,3.2,4.8,1.8,versicolor
+6.1,2.8,4.0,1.3,versicolor
+6.3,2.5,4.9,1.5,versicolor
+6.1,2.8,4.7,1.2,versicolor
+6.4,2.9,4.3,1.3,versicolor
+6.6,3.0,4.4,1.4,versicolor
+6.8,2.8,4.8,1.4,versicolor
+6.7,3.0,5.0,1.7,versicolor
+6.0,2.9,4.5,1.5,versicolor
+5.7,2.6,3.5,1.0,versicolor
+5.5,2.4,3.8,1.1,versicolor
+5.5,2.4,3.7,1.0,versicolor
+5.8,2.7,3.9,1.2,versicolor
+6.0,2.7,5.1,1.6,versicolor
+5.4,3.0,4.5,1.5,versicolor
+6.0,3.4,4.5,1.6,versicolor
+6.7,3.1,4.7,1.5,versicolor
+6.3,2.3,4.4,1.3,versicolor
+5.6,3.0,4.1,1.3,versicolor
+5.5,2.5,4.0,1.3,versicolor
+5.5,2.6,4.4,1.2,versicolor
+6.1,3.0,4.6,1.4,versicolor
+5.8,2.6,4.0,1.2,versicolor
+5.0,2.3,3.3,1.0,versicolor
+5.6,2.7,4.2,1.3,versicolor
+5.7,3.0,4.2,1.2,versicolor
+5.7,2.9,4.2,1.3,versicolor
+6.2,2.9,4.3,1.3,versicolor
+5.1,2.5,3.0,1.1,versicolor
+5.7,2.8,4.1,1.3,versicolor
+6.3,3.3,6.0,2.5,virginica
+5.8,2.7,5.1,1.9,virginica
+7.1,3.0,5.9,2.1,virginica
+6.3,2.9,5.6,1.8,virginica
+6.5,3.0,5.8,2.2,virginica
+7.6,3.0,6.6,2.1,virginica
+4.9,2.5,4.5,1.7,virginica
+7.3,2.9,6.3,1.8,virginica
+6.7,2.5,5.8,1.8,virginica
+7.2,3.6,6.1,2.5,virginica
+6.5,3.2,5.1,2.0,virginica
+6.4,2.7,5.3,1.9,virginica
+6.8,3.0,5.5,2.1,virginica
+5.7,2.5,5.0,2.0,virginica
+5.8,2.8,5.1,2.4,virginica
+6.4,3.2,5.3,2.3,virginica
+6.5,3.0,5.5,1.8,virginica
+7.7,3.8,6.7,2.2,virginica
+7.7,2.6,6.9,2.3,virginica
+6.0,2.2,5.0,1.5,virginica
+6.9,3.2,5.7,2.3,virginica
+5.6,2.8,4.9,2.0,virginica
+7.7,2.8,6.7,2.0,virginica
+6.3,2.7,4.9,1.8,virginica
+6.7,3.3,5.7,2.1,virginica
+7.2,3.2,6.0,1.8,virginica
+6.2,2.8,4.8,1.8,virginica
+6.1,3.0,4.9,1.8,virginica
+6.4,2.8,5.6,2.1,virginica
+7.2,3.0,5.8,1.6,virginica
+7.4,2.8,6.1,1.9,virginica
+7.9,3.8,6.4,2.0,virginica
+6.4,2.8,5.6,2.2,virginica
+6.3,2.8,5.1,1.5,virginica
+6.1,2.6,5.6,1.4,virginica
+7.7,3.0,6.1,2.3,virginica
+6.3,3.4,5.6,2.4,virginica
+6.4,3.1,5.5,1.8,virginica
+6.0,3.0,4.8,1.8,virginica
+6.9,3.1,5.4,2.1,virginica
+6.7,3.1,5.6,2.4,virginica
+6.9,3.1,5.1,2.3,virginica
+5.8,2.7,5.1,1.9,virginica
+6.8,3.2,5.9,2.3,virginica
+6.7,3.3,5.7,2.5,virginica
+6.7,3.0,5.2,2.3,virginica
+6.3,2.5,5.0,1.9,virginica
+6.5,3.0,5.2,2.0,virginica
+6.2,3.4,5.4,2.3,virginica
+5.9,3.0,5.1,1.8,virginica

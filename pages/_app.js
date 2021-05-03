@@ -1,13 +1,13 @@
 import '../styles/globals.css'
-import ConfigProvider from '@contexts/ConfigContext'
+import ConfigProvider from "@contexts/ConfigContext"
 
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <ConfigProvider>
-      <Component {...pageProps} />
-    </ConfigProvider>
-  )
-}
+const MyApp=({ Component, pageProps }) =>  
+(
+  <ConfigProvider>
+    <Component {...pageProps} />
+  </ConfigProvider>
+)
+
 
 export default MyApp
