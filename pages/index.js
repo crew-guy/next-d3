@@ -1,75 +1,67 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import axios from 'axios'
 import * as d3 from 'd3'
-import React,{useState, useEffect} from 'react'
-    
-export default function Home ({data,text})
-{
-  console.log(`${text.length / 1024} kB`)
-  console.log(`${data.length} rows`)
+import {useState, useEffect} from 'react'
+import {scaleLinear, scaleBand, max, format} from 'd3'
+import {AxisTop} from '@components/AxisTop'
+import {AxisBottom} from '@components/AxisBottom'
+import {Marks} from '@components/Marks'
+import {fetchData} from '@helpers/fetchData'
+
+export default function Home({data}) {
+  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState(0)
+
+  useEffect(()=>{
+    setHeight(window.innerHeight-100)
+    setWidth(window.innerWidth-100)
+  },[])
+
+  const margin = {top:40, left:300, right:40, bottom:100}
+  const innerWidth = width - margin.left - margin.right
+  const innerHeight = height - margin.top - margin.bottom
+
+  const xVal = d => d.Population*1000
+  const yVal = d => d.Country
+
+  const yScale = scaleBand()
+      .domain(data.map(yVal))
+      .range([0,innerHeight])
+      .padding(0.2)
+
+  const xScale = scaleLinear()
+      .domain([0, max(data,xVal)])
+      .range([0, innerWidth])
   
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
-  useEffect(() => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  });
   
-  const pieArc = d3.arc()
-  .innerRadius(0)
-  .outerRadius(width)
+  const xAxisLabelOffset = 80
+  const siFormat = format(".2s");
+  const tickFormat = tickFormat => siFormat(tickFormat).replace('G','B')
   
-  const colorPie = d3.pie().value(1)
 
   return (
-    <div className={styles.container}>
-      <svg width={width} height={height}>
-        <g transform={`translate(${width/2}, ${height/2})`} >
-          
-          //? Using d3.pie()
-          {colorPie(data).map(d => (
-            <path
-              fill={d.data['Hex']}
-              d={pieArc(d)}
-            />
+        <svg width={width} height={height}>
+          <g transform={`translate(${margin.left},${margin.top})`} >
+            <AxisTop xScale={xScale} innerHeight={innerHeight} tickFormat={tickFormat} />
+            <AxisBottom yScale={yScale}/>
+            <text
+              className="axis-label"
+              x={innerWidth / 2}
+              textAnchor='center'
+              y={innerHeight + xAxisLabelOffset}
+            >Population</text>
+            <Marks data={data} xScale={xScale} yScale={yScale} xVal={xVal} yVal={yVal} toolTipFormat={tickFormat} />
+          </g>
+        </svg>
+)}
 
-          ))}  
-        
-          
-          //? Standard approach
-          {/*props.data.map((d, i) => (
-            <path
-              fill={d['Hex']}
-              d={pieArc({
-              startAngle: (i/data.length)*2*Math.PI,
-              endAngle: ((i+1)/data.length)*2*Math.PI
-            })}/>
-          ))*/}
-
-          
-        </g>  
-      </svg>
-    </div>
-  )
-}
-
-
-export const getStaticProps = async() =>
-{
-  const csvUrl = "https://gist.githubusercontent.com/crew-guy/7cbac5e5cf2dbac4ab6a4c5e43e6f70d/raw/data.csv"
-  
-  //? M1 => Using d3.csvParse() function
-  // const unParsedata = await fetch(csvUrl)
-  // const text = await unParsedata.text()
-  // const data = d3.csvParse(text)
-
-
-  //? M2 => Using d3.csv()
-  const data = await d3.csv(csvUrl)
-  const text =  d3.csvFormat(data)
-
+export const getStaticProps = async () => {
+  const data = await fetchData()
+  console.log(data)
   return {
-    props: {data, text}
+    props:{
+      data
+    }
   }
 }
+
