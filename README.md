@@ -159,3 +159,271 @@ export const getStaticProps = async () => {
 ```
 
 
+## Configuration context
+
+### Snippet
+
+- This file simply contains all direct numerical configurations
+
+    ```jsx
+    // MARGIN
+    export const MARGIN = {
+        top: 60,
+        left: 100,
+        bottom: 150,
+        right: 300,
+    }
+
+    // LABELS
+    export const X_AXIS_LABEL_OFFSET = 120
+    export const Y_AXIS_LABEL_OFFSET = 40
+
+    // MARKS
+    export const RADIUS_CIRCLE = 12
+
+    // TICKS
+    export const X_AXIS_TICK_OFFSET = 8
+    export const Y_AXIS_TICK_OFFSET = 8
+
+    // LEGEND
+    export const COLOR_ARRAY = ['#E6842A', '#137B80', '#8E6C8A']
+    export const TICK_SPACING = 32
+    export const TICK_TEXT_OFFSET = 20
+
+    export const LEGEND_X_OFFSET = 130
+    export const LEGEND_Y_OFFSET = 250
+
+    // INTERACTIVITY
+    export const FADE_OPACITY = 0.2
+    ```
+
+- This file is the Context for the entire plot and exposes a hook to use the context as well
+
+    ```tsx
+    import React, { useState, useEffect, useContext } from 'react'
+    // import fetchData from '@helpers/fetchData'
+    import {scaleLinear, max, extent, scaleOrdinal} from 'd3'
+    import {useData} from '@hooks/useData'
+    import { attributes } from '@helpers/attributes'
+    import
+        {
+            MARGIN,
+            X_AXIS_LABEL_OFFSET,
+            Y_AXIS_LABEL_OFFSET,
+            RADIUS_CIRCLE,
+            X_AXIS_TICK_OFFSET,
+            Y_AXIS_TICK_OFFSET,
+            COLOR_ARRAY,
+            TICK_TEXT_OFFSET,
+            TICK_SPACING,
+            LEGEND_X_OFFSET,
+            LEGEND_Y_OFFSET,
+            FADE_OPACITY
+        } from '@helpers/configValues'
+
+    const ConfigContext = React.createContext()
+
+    export const useConfig = () => useContext(ConfigContext)
+
+    const ConfigProvider = ({ children }) =>
+    {
+        const config = {}
+        const [data, setData] = useState([])
+        const [height, setHeight] = useState(0)
+        const [width, setWidth] = useState(0)
+
+        //* FOR HOVER INTERACTIVITY OF MARKS
+        const [hoveredValue, setHoveredValue] = useState(null)
+        config.hoveredValue = hoveredValue
+        config.setHoveredValue = setHoveredValue
+
+        useEffect( () =>
+        {
+            (async () => {
+                const temp = await useData()
+                setData(temp)
+                setHeight(window.innerHeight)
+                setWidth(window.innerWidth)
+            })()
+            // console.log(data)
+        }, [])
+
+        config.margin = MARGIN
+
+        // console.log(data)
+        config.data = data
+        // console.log(config.data)
+
+        //* ATTRIBUTES
+        const currentX = attributes[0]
+        const currentY = attributes[1]
+
+        config.currentX = currentX
+        config.currentY = currentY
+
+        const [xAttribute, setXAttribute] = useState(currentX)
+        const [yAttribute, setYAttribute] = useState(currentY)
+        
+        config.setXAttribute = setXAttribute
+        config.setYAttribute = setYAttribute
+
+        config.attributes = attributes
+
+        config.xVal = d => d[xAttribute.value]
+        config.yVal = d => d[yAttribute.value]
+        config.colorVal = d => d.species
+
+        //* FOR DATA INTERACTIVITY ON HOVER
+        config.filteredData = data.filter(d => hoveredValue === config.colorVal(d))
+
+        // console.log(config.xVal)
+
+        //* HEIGHTS AND WIDTHS
+        config.height = height
+        config.width = width
+        config.innerWidth = width - config.margin.left - config.margin.right
+        config.innerHeight = height - config.margin.top - config.margin.bottom
+
+        
+        //* SCALES
+        config.xScale = scaleLinear()
+            // .domain(extent(data, config.xVal))
+            .domain(extent(data,config.xVal))
+            .range([0,config.innerWidth])
+            .nice()
+
+        config.yScale = scaleLinear()
+            // .domain(extent(data, config.yVal))
+            .domain([0,max(data,config.yVal)])
+            .range([config.innerHeight, 0])
+        
+        config.colorScale = scaleOrdinal()
+            .domain(data.map(config.colorVal))
+            .range(COLOR_ARRAY)
+
+        //* TICKS AND TOOLTIPS
+        config.xAxisTickOffset = X_AXIS_TICK_OFFSET
+        config.yAxisTickOffset = Y_AXIS_TICK_OFFSET
+        config.tooltipFormat = d => d
+        config.xAxisTickFormat = d => d
+        config.yAxisTickFormat = d => d
+
+        //* LABELS
+        config.xAxisLabel = xAttribute.label
+        config.yAxisLabel = yAttribute.label
+        config.xAxisLabelOffset = X_AXIS_LABEL_OFFSET
+        config.yAxisLabelOffset = Y_AXIS_LABEL_OFFSET
+
+        //* MARKS
+        config.radiusCircle = RADIUS_CIRCLE
+
+        //* LEGEND
+        config.legendXOffset = LEGEND_X_OFFSET
+        config.legendYOffset = LEGEND_Y_OFFSET
+        config.tickSpacing = TICK_SPACING
+        config.tickTextOffset = TICK_TEXT_OFFSET
+
+        //* INTERACTIVITY
+        config.fadeOpacity = FADE_OPACITY
+        
+        return (
+            <ConfigContext.Provider value={config} >
+                {children}
+            </ConfigContext.Provider>
+        )
+    }
+
+    export default ConfigProvider
+    ```
+
+Be sure to wrap the provider around the components in the root file
+
+- After all this, your App file becomes this simple
+
+    ```tsx
+    import AxesLabels from '@components/AxesLabels'
+    import MarksAndAxes from '@components/MarksAndAxes'
+    import ControlPanel from '@components/ControlPanel'
+    import Legend from '@components/Legend'
+
+    const Home = () =>
+    {
+      const config = useConfig()
+
+      const {
+        height,
+        width,
+      } = config
+
+      return (
+        <>
+          <ControlPanel/>
+        <svg
+          height={height}
+          width={width}
+        >
+          <Legend/>  
+          <MarksAndAxes/>
+          <AxesLabels/>        
+        </svg>
+      </>
+      )
+    }
+
+    ```
+
+- Say now we wish to deal with ControlPanel to change X and Y 
+coordinates
+
+    ```tsx
+    import React from 'react'
+    //? REACT DROPDOWN
+    import Dropdown from 'react-dropdown'
+    import 'react-dropdown/style.css';
+    import {useConfig} from '@contexts/ConfigContext'
+
+    //? USING CUSTOM BUILD DROPDOWN
+    // import {Dropdown} from '@components/Dropdown'
+
+    const ControlPanel = () =>
+    {
+        const config = useConfig()
+        const {
+            attributes,
+            setXAttribute,
+            setYAttribute,
+            currentX,
+            currentY
+        } = config
+        const defaultOptionX = currentX;
+        const defaultOptionY = currentY;
+        return (
+            <div className="c-panel"  >
+            {/*<Dropdown 
+              attributes={attributes} 
+              setAttribute={setXAttribute}
+            />
+            <Dropdown 
+              attributes={attributes} 
+              setAttribute={setYAttribute}
+            />*/}
+            <Dropdown
+              options={attributes}
+              onChange={(attribute)=> setXAttribute(attribute) }
+              value={defaultOptionX}
+              placeholder="Select X"
+            />
+            <Dropdown
+              options={attributes}
+              onChange={(attribute)=> setYAttribute(attribute) }
+              value={defaultOptionY}
+              placeholder="Select Y"
+            />
+            {/* <ColorLegend data={data} colorScale={colorScale} colorVal={colorVal} />*/}
+          </div>
+        )
+    }
+
+    export default ControlPanel
+
+    ```
