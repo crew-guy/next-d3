@@ -527,3 +527,118 @@ export default function Marks({
       )
     }
 ```
+
+
+## Geospatial maps
+
+### Snippet #1
+
+d3 ⇒ feature and mesh functions are used
+
+1. **feature** ⇒ function used to convert part topoJSON (less file size) data we obtained into corresponding geoJSON (for SVG rendering, large file size)
+2. **mesh** ⇒ to generate latitude - longitude mesh
+
+Fetching data in topoJSON format and then converting it into geoJSON for SVGs to render
+
+```jsx
+import * as d3 from 'd3'
+import {feature, mesh} from 'topojson'
+
+export const fetchData = async () =>
+{
+    const jsonUrl = "https://unpkg.com/world-atlas@2.0.2/countries-50m.json"
+
+    const topojsonData = await d3.json(jsonUrl)
+    const { countries } = topojsonData.objects
+    
+
+    return ({
+        countries : feature(topojsonData, countries),
+        interiors : mesh(topojsonData, countries, (a,xb)=> a!==b)
+    })
+}
+```
+
+### Snippet #3
+
+d3 modules for generating graticule, projection and background sphere were used
+
+1. **geoEqualEarth, geoNaturalEarth1** ⇒ Both are simply views of the global map based off of which a **projection** is made
+2. **geoPath** ⇒ Used to draw that background sphere on which **projection** is applied
+3. **geoGraticule** ⇒ Simply to generate latitude-longitude grid
+
+```jsx
+import {geoEqualEarth, geoNaturalEarth1, geoPath, geoGraticule } from 'd3'
+
+// const projection = geoEqualEarth()
+const projection = geoNaturalEarth1()
+const path = geoPath(projection)
+const graticule = geoGraticule() 
+
+export default function Marks({countries, interiors})
+{
+    // console.log(countries)
+    return (
+        <g className="marks" >
+            <path className="sphere" d={path({type:'Sphere'})}/>
+            <path className="graticules" d={path(graticule())} />
+            {countries.features.map(feature => (
+                <path className="feature" d = {path(feature)}/>
+            ))}
+            {/*<path className="interior" d={path(interiors)}/>*/}
+        </g>
+
+      )
+    }
+```
+
+### Snippet #3
+
+Just a view of the main **app** root file
+
+```jsx
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import {fetchData} from '@helpers/fetchData'
+import { useState, useEffect } from 'react'
+
+// Importing the components 
+import Marks from '@components/Marks'
+
+export default function Home({countries, interiors}) {
+  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState(0)
+  
+  useEffect(() =>
+  {
+    setHeight(window.innerHeight)
+    setWidth(window.innerWidth)
+  }, [])
+  
+  const margin = {
+    top: 60,
+    left: 140,
+    right: 80,
+    bottom:100
+  }
+
+  // console.log(countries)
+
+  return (
+      <svg height={height} width={width} >
+        <Marks
+        countries={countries} interiors={interiors}
+        />
+    </svg>
+  )
+}
+
+export const getStaticProps = async () =>
+{
+  const { countries, interiors } = await fetchData()
+  console.log(countries, interiors)
+  return {
+    props:{countries, interiors}
+  }
+}
+```
