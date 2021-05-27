@@ -427,3 +427,103 @@ coordinates
     export default ControlPanel
 
     ```
+
+
+## Binned aggregation
+
+### Snippet
+
+Basically, here, I have aggregated the total number of dead people by month and set the yScale to have the total deaths sum as the marks
+
+New d3 functions used here are bin(earlier known as histogram)
+
+```jsx
+import {bin, scaleLinear, max, timeMonths, sum} from 'd3'
+
+const [start, stop] = xScale.domain()
+
+// Binned data simpy takes all the cases of people dying between start and end date and groups each such case as an object, into a collective array which contains => x no. of case objects, start date, end data  
+// So basically, if say we have 48 months, binned data is an array of 48 arrays where each of the 48 arrays has 3 things :
+// 1. Start date (eg : Jan 1st)
+// 2. End data (eg : Feb 1st, cause we are binning by month)
+// 3. Individual case objects 
+
+// **binnedData = [**
+//		**[**
+//       **x0 = .....** -> start date of bin
+//       **x1 = .....** -> end date (i.e. start date + 1 month) of bin
+//       **{**
+//          **totalDead = .....**
+//          **{...someOtherCaseRelatedInfo(eg : geo-coordinates)}**
+//       **}**  -> a case object
+//       **{},{}** -> more case objects
+//    **]** -> a month array
+// **]**
+
+const binnedData = bin()
+    .value(xVal)
+    .domain(xScale.domain())
+    .thresholds(timeMonths(start, stop))
+		(data)
+
+// Summed binned data just looks into the binned data array's case objects, extracts the number of deaths that occured on each timestamp and sums it up as a single number to use as our y coordinate
+// Also, we rawly extract the start (x0) and end (x1) from each of the month array
+// Eg, we have 48 months' binnedData
+// summedBinnedData will be an array of 48 object where each object will have 3 things :
+// 1. Start date (eg : Jan 1st)
+// 2. End date (eg : Feb 1st, cause in binnedData, we were binning by month)
+// 3. y = just a sum obtained by extracting the number of deaths from each case object and summing this metric across all case objects in a month array
+
+// **summedBinnedData = [
+//    {  
+//       x0 = ...** -> start date of bin (eg : Jan 1st)
+**//       x1 = ....** -> end date of bin (eg : Feb 1st (start date + 1 month ))
+**//		   y = ....** -> sum of deaths in a month (eg : between Jan 1st and Feb 1st)
+//    **}
+// ]**
+
+const summedBinnedData = binnedData
+
+    .map(array => ({
+      y: sum(array, yVal),
+      x0: array.x0,
+      x1:array.x1
+    }))
+
+// Gotta redefine yScale based on sums calculated in binnedData
+const yScale = scaleLinear()
+  .domain([0, max(summedBinnedData, d => d.y)])
+  .range([innerHeight,0])
+```
+
+## Rendering the bins using SVG rectangle
+
+Just gotta set height and width based on updated yscale
+
+```jsx
+export default function Marks({
+    binnedData,
+    xScale,
+    yScale,
+    tooltipFormat,
+    innerHeight
+})
+{
+    return (
+        <g className="marks" >
+            {binnedData.map((dataPoint,i) => (
+                <g key={i} className="mark">
+                    <rect
+                        x={xScale(dataPoint.x0)}
+                        y={yScale(dataPoint.y)}
+                        width={xScale(dataPoint.x1) - xScale(dataPoint.x0)}
+                        height={innerHeight-yScale(dataPoint.y)}
+                    />
+                    <title>{tooltipFormat(dataPoint.y)} </title>
+                </g>
+                )  )}
+        </g>
+
+      )
+    }
+```
