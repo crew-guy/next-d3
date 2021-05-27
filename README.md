@@ -1,3 +1,36 @@
+## Fetching from csv file
+
+Using the **d3.csv()**, **d3.csvParse()** and **d3.csvFormat()** functions to get data from a CSV file in the form of array of objects where :
+
+1. Array elem = x axis = row = item
+2. Object prop = y axis = column = attribute
+
+```jsx
+export const fetchData = async() => {
+    const csvUrl = "https://gist.githubusercontent.com/crew-guy/e1ae0b5db6ace5eda68bc8fb9e903576/raw/UN%2520World%2520Population%2520Dataset%2520-%2520Sheet1.csv"
+
+    **// Using d3.csvParse()**
+    // const unparsedData = await fetch(csvUrl)
+    // const text = await unparsedData.text()
+    // const data = d3.csvParse(text)
+    // console.log(data)
+
+    **// Using d3.csv()**
+    // This function is simply passed to d3.csv() as a **callback specifying what parts of each received result (usually JS objects) do we wanna edit, extract**
+		const row = (d) => {
+        d.Population = +d['2020']
+        return d
+    }
+    const fullData = await d3.csv(csvUrl, row)
+    const data = fullData.slice(0,10)
+    // const data = await d3.csv(csvUrl)
+    const text = d3.csvFormat(data)
+    // console.log(dataDirect)
+    // console.log(data)
+    return data;
+}
+```
+
 ## Margins and Axes
 
 Basically, we use from d3, the :
