@@ -113,6 +113,25 @@ export const AxisBottom = ({yScale}) => (
 )
 ```
 
+## Size of marks
+
+A small optimization tweak on the dataviz to show the intensity of a mark by using its size as a metric
+
+### Snippet
+
+Here, the size of the circle mark is set on the fact that how populous a place is.
+
+This is the inside the ConfigContext.js file for this viz
+
+```jsx
+// Using size to depict population
+    config.maxRadius = 20
+    config.sizeValue = d => d.population
+    config.sizeScale = scaleSqrt()
+        .domain([0, max(data.cities, config.sizeValue)])
+        .range([0, config.maxRadius])
+```
+
 ## Rendering chart
 
 ### Snippet
