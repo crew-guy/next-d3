@@ -746,4 +746,92 @@ export const ColorLegend = () =>
     ))
 
 }
-```	
+```
+
+## Controlling X and Y attributes in a 2D-Scatter plot
+
+### Snippet
+
+Simply access the setXAttribute or setYAttribute from "Configuration Context" and you have 2 options now :
+
+- Build a custom Dropdown component to refilter the data being fetched
+
+    ```jsx
+    import React from 'react'
+
+    export const Dropdown = ({attributes, setAttribute}) => {
+        return (
+            <>
+                <label htmlFor='x-select'/>
+                <select id="x-select" onChange={(e) =>
+                    {setAttribute(
+                            attributes.find(attribute =>
+                            (
+                                attribute.value === e.target.value
+                            ))
+                        )
+                    }}
+                >
+                    {attributes.map(({ label, value }) => (
+                        <option value={value}>{label}</option>
+                    ))}
+                </select>
+            </>
+        )
+    }		
+    ```
+
+- Use 'react-dropdown' library to refilter the data being fetched
+
+    ```tsx
+    import React from 'react'
+    //? REACT DROPDOWN
+    import Dropdown from 'react-dropdown'
+    import 'react-dropdown/style.css';
+    import {useConfig} from '@contexts/ConfigContext'
+
+    //? USING CUSTOM BUILD DROPDOWN
+    // import {Dropdown} from '@components/Dropdown'
+
+    const ControlPanel = () =>
+    {
+        const config = useConfig()
+        const {
+            attributes,
+            setXAttribute,
+            setYAttribute,
+            currentX,
+            currentY
+        } = config
+        const defaultOptionX = currentX;
+        const defaultOptionY = currentY;
+        return (
+            <div className="c-panel"  >
+            {/*<Dropdown 
+              attributes={attributes} 
+              setAttribute={setXAttribute}
+            />
+            <Dropdown 
+              attributes={attributes} 
+              setAttribute={setYAttribute}
+            />*/}
+            <Dropdown
+              options={attributes}
+              onChange={(attribute)=> setXAttribute(attribute) }
+              value={defaultOptionX}
+              placeholder="Select X"
+            />
+            <Dropdown
+              options={attributes}
+              onChange={(attribute)=> setYAttribute(attribute) }
+              value={defaultOptionY}
+              placeholder="Select Y"
+            />
+            {/* <ColorLegend data={data} colorScale={colorScale} colorVal={colorVal} />*/}
+          </div>
+        )
+    }
+
+    export default ControlPanel
+    ```
+
