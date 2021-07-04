@@ -2,6 +2,7 @@
 
 Using the **d3.csv()**, **d3.csvParse()** and **d3.csvFormat()** functions to get data from a CSV file in the form of array of objects where :
 
+
 1. Array elem = x axis = row = item
 2. Object prop = y axis = column = attribute
 
